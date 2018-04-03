@@ -19,10 +19,10 @@ Create a simulation of the game show "Let's Make a Deal."
 Take as input though the command line the following information in this order:
 
 - Number of doors.
-- Number of simulations.
-- Switch or 
+- Number of trials.
+- Switch or Stay strategy.
 
-Output the probability as a single number in floating point format [0.0, 1.0]
+Output the probability of success as a single number in floating point format [0.0, 1.0]
 
 Your code should create a class named "LetsMakeADeal".
 
@@ -32,5 +32,6 @@ After the simulations are run, total the probablity of each strategy (Switch/Sta
 
 Display the probabilty of obtaining the Car.
 
-Create an assert statement to ensure the probability of a Goat vs a Car is 1.0
+Create an assert statement to ensure the probability of a Goat vs a Car is 1.0.
 
+Provide command line help. Be concise and helpful. 
