@@ -8,15 +8,16 @@ public:
 	enum class choice {stay = 0, willswitch};
 
 private:
-	int numDoors_ = 3;
-	int numDisclose_ = 1;
-	choice strategy_ = choice::stay;
+	unsigned numDoors_{ 3 };
+	unsigned numDisclose_{ 1 };
+	choice strategy_{ choice::stay };
 	std::vector<bool> doors_ {};
 
 public:
-	LetsMakeADeal(int numDoors, int numDisclose, choice strategy);
+	LetsMakeADeal(unsigned numDoors, unsigned numDisclose, choice strategy);
 
 public:
-	choice RunGame();
+	unsigned RunGame();
+	unsigned randomGen(unsigned maxNum);
 
 };

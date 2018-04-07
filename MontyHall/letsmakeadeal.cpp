@@ -2,7 +2,7 @@
 #include "letsmakeadeal.h"
 #include <random>
 
-LetsMakeADeal::LetsMakeADeal(int numDoors, int numDisclose, choice strategy):
+LetsMakeADeal::LetsMakeADeal(unsigned numDoors, unsigned numDisclose, choice strategy):
 numDoors_{numDoors},
 numDisclose_{numDisclose},
 strategy_{strategy}
@@ -16,26 +16,42 @@ strategy_{strategy}
 	}
 }
 
-LetsMakeADeal::choice LetsMakeADeal::RunGame()
+unsigned LetsMakeADeal::RunGame()
 {
-	// Create random number generator and generate a number between 0 and numDoors - 1
-	std::default_random_engine generator;
-	const std::uniform_int_distribution<int> distribution(0, numDoors_ - 1);
+	const unsigned selectDoor = randomGen(numDoors_);
 
-	const int selectDoor = distribution(generator);
-
-	// TODO: Finish Algorithm below
 	for (size_t i{ 0 }; i < numDisclose_; i++)
 	{
 		// Select a door to disclose
-		const int discDoor = distribution(generator);
+		unsigned discDoor = randomGen(numDoors_ - i);
 		
-		while (doors_[discDoor] != 1)
+		while (discDoor == doors_[0] || discDoor == selectDoor)
 		{
-			
+			discDoor = randomGen(numDoors_ - i);
+		}
+		doors_.erase(doors_.begin + discDoor);
+	}
+
+	unsigned result = selectDoor;
+
+	if (strategy_ == choice::willswitch)
+	{
+		while (result == selectDoor)
+		{
+			result = randomGen(doors_.size());
 		}
 	}
 
-	return choice::stay;
+	return result;
+}
+
+unsigned LetsMakeADeal::randomGen(unsigned maxNum) 
+{
+	// Create random number generator and generate a number between 0 and numDoors - 1
+	static std::random_device rd;  //Will be used to obtain a seed for the random number engine
+	static std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+	const std::uniform_int_distribution<> dis(0, maxNum);
+
+	return dis(gen);
 }
 
