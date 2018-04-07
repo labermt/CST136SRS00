@@ -2,6 +2,7 @@
 Monty Hall
 
 Name: 
+Ariados
 
 ---
 
@@ -36,3 +37,23 @@ Display the probabilty of obtaining the Car.
 Create an assert statement to ensure the probability of a Goat vs a Car is 1.0. 
 
 Provide command line help in the event the command line is incomplete. Be concise and helpful. 
+
+	
+		Making a deal algorithm
+
+		- set vector to size of #doors with
+		- first element 1, rest 0 (1 = car, 0 = goat)
+		- randomly choose any door (selectDoor)
+		- remove a random door thats not selectDoor or 1st element from the vector for disclose # of times
+		- now the 1st element is the car, and there are (#doors - #disclose) "0" elements after it
+		- if stay, return value of selectDoor element
+		- if switch, randomly pick another door (not selectDoor) and return value
+vector for doors
+# of doors == 3
+#disclose == 1 
+choice == stay switch
+instances = 1 
+
+member function 
+constructor 
+runGame
