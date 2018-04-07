@@ -10,9 +10,13 @@ public:
 private:
 	int numDoors_ = 3;
 	int numDisclose_ = 1;
+	choice strategy_ = choice::stay;
 	std::vector<bool> doors_ {};
 
 public:
-	choice RunGame(int numDoors, int numDisclose, choice choice);
+	LetsMakeADeal(int numDoors, int numDisclose, choice strategy);
+
+public:
+	choice RunGame();
 
 };
