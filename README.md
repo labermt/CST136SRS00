@@ -1,7 +1,34 @@
 # CST136SRS00
 Monty Hall
 
-Name: 
+Name: Andrew Deraita
+Class ID: Volbeat
+
+---
+
+PseudoCode:
+
+Class will contain data members:
+- # of doors (default 3)
+- # of pre-disclosed doors (default 1)
+- Door the car is behind
+- Vector to store the ordered contents of their doors
+- probability if stay ?
+- probability if switch ?
+
+Class member fuctions:
+- setter for # of doors
+- setter for # pre-disclosed doors
+- setter for door car is behind
+- function(s) to calculate probabilites
+
+Will use std::vector for storing the doors and their contents
+Will use gsl::span as the container to store instances of the class
+Main loop will keep track of probabilities and average them
+Then, output the probability of obtaining a car with selected choice
+
+* Command line help:
+
 
 ---
 
