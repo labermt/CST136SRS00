@@ -1,7 +1,6 @@
-# CST136SRS00
 Monty Hall
 
-Name: 
+Class ID: Phantump
 
 ---
 
@@ -12,6 +11,7 @@ Purpose:
 - Learn about containers, including std::array, std::vector, gsl::span
 - Learn about random number generators in C++11
 
+SRS ID: CST136SRS00
 Project Name(s): MontyHall
 
 Create a simulation of the game show "Let's Make a Deal."
