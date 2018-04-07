@@ -2,6 +2,7 @@
 Monty Hall
 
 Name: Andrew Deraita
+
 Class ID: Volbeat
 
 ---
@@ -9,9 +10,6 @@ Class ID: Volbeat
 PseudoCode:
 
 Class will contain data members:
-- # of doors (default 3)
-- # of pre-disclosed doors (default 1)
-- Door the car is behind
 - Vector to store the ordered contents of their doors
 
 
