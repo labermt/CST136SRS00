@@ -13,8 +13,7 @@ Class will contain data members:
 - # of pre-disclosed doors (default 1)
 - Door the car is behind
 - Vector to store the ordered contents of their doors
-- probability if stay ?
-- probability if switch ?
+
 
 Class member fuctions:
 - setter for # of doors
@@ -29,6 +28,17 @@ Then, output the probability of obtaining a car with selected choice
 
 * Command line help:
 
+---
+
+Making a deal algorithm
+
+- set vector to size of #doors with
+- first element 1, rest 0 (1 = car, 0 = goat)
+- randomly choose any door (selectDoor)
+- remove a random door thats not selectDoor or 1st element from the vector for disclose # of times 
+- now the 1st element is the car, and there are (#doors - #disclose) "0" elements after it
+- if stay, return value of selectDoor element
+- if switch, randomly pick another door (not selectDoor) and return value
 
 ---
 
