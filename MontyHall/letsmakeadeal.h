@@ -8,16 +8,19 @@ public:
 	enum class choice {stay = 0, willswitch};
 
 private:
-	unsigned numDoors_{ 3 };
-	unsigned numDisclose_{ 1 };
-	choice strategy_{ choice::stay };
-	std::vector<bool> doors_ {};
+	const size_t numDoors_{ 3 };
+	const size_t numDisclose_{ 1 };
+	const size_t carDoor_;
+	const size_t selectDoor_;
+	const choice strategy_{ choice::stay };
+	std::vector<bool> doors_;
 
 public:
-	LetsMakeADeal(unsigned numDoors, unsigned numDisclose, choice strategy);
+	LetsMakeADeal(size_t numDoors, size_t numDisclose, choice strategy);
 
 public:
-	unsigned RunGame();
-	unsigned randomGen(unsigned maxNum);
+	bool runGame();
 
+private:
+	static size_t randomGen(size_t maxNum);
 };
