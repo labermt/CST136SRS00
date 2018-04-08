@@ -2,16 +2,26 @@
 #include "LetsMakeADeal.h"
 #include <random>
 
+LetsMakeADeal::LetsMakeADeal()
+	:numDoors{ 3 }, numDisclosedDoors{ 1 }, stay{ true }
+{
 
+}
 LetsMakeADeal::LetsMakeADeal(unsigned numDoors_, unsigned numDisclosedDoors_, bool stay_)
 	:numDoors{ numDoors_ }, numDisclosedDoors{ numDisclosedDoors_ }, stay{ stay_ }
 {
+	playGame();
 }
 
 bool LetsMakeADeal::getResult()
 {
+	return result;
+}
+
+void LetsMakeADeal::playGame()
+{
 	//init doors vector
-	std::vector<bool> doors(numDoors, false);
+	std::vector<int> doors(numDoors, false);
 
 	//setup random generator
 	std::random_device                  rand_dev;
@@ -32,6 +42,7 @@ bool LetsMakeADeal::getResult()
 		if (tempDoor != chosenDoor && doors[tempDoor] != true) {
 			doors.erase(doors.begin() + tempDoor);
 			i++;
+			if (tempDoor < chosenDoor) chosenDoor--; //move chosen door down one if necessary
 		}
 	}
 
@@ -40,12 +51,13 @@ bool LetsMakeADeal::getResult()
 	{
 		//switch
 		int oldDoor = chosenDoor;
+		distr = std::uniform_int_distribution<int>(0, doors.size() - 1);
 		while (chosenDoor == oldDoor) 
-			chosenDoor = distr(generator);
+			chosenDoor = distr(generator); 
 	}
 
 	//open your door
-	return doors[chosenDoor];
+	result = doors[chosenDoor];
 }
 
 
