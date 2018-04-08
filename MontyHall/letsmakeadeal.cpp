@@ -5,45 +5,45 @@
 LetsMakeADeal::LetsMakeADeal(const size_t numDoors, const size_t numDisclose, choice strategy):
 numDoors_{numDoors},
 numDisclose_{numDisclose},
-carDoor_{randomGen(numDoors)},
 selectDoor_{randomGen(numDoors)},
 strategy_{strategy}
 {
-	//Populate vector with a 0 (goat) for each door
 	for (size_t i{ 0 }; i < numDoors; i++)
 	{
-		doors_.push_back(prize::closed);
+		doors_.push_back(prize::goat);
 	}
 
-	doors_[carDoor_] = prize::car;
+	doors_[randomGen(numDoors)] = prize::car;
 }
 
 LetsMakeADeal::prize LetsMakeADeal::runGame()
 {
-	// Open all numDisclose_ number of doors and remove them from doors_
+	// Open numDisclose_ number of doors
 	for (size_t i{ 0 }; i < numDisclose_; i++)
 	{
-		auto discloseDoor = randomGen(numDoors_ - i);
+		auto discloseDoor = randomGen(numDoors_);
 		
-		while (discloseDoor == carDoor_ || discloseDoor == selectDoor_)
+		while (doors_[discloseDoor] == prize::car || 
+				doors_[discloseDoor] == prize::open || 
+				discloseDoor == selectDoor_)
 		{
-			discloseDoor = randomGen(numDoors_ - i);
+			discloseDoor = randomGen(numDoors_);
 		}
 		doors_[discloseDoor] = prize::open;
 	}
 
-	prize result = doors_[selectDoor_];
+	auto result = selectDoor_;
 
 	// If the switch option is set, pick another unopened door
 	if (strategy_ == choice::willswitch)
 	{
-		while (result == doors_[selectDoor_])
+		while (result == selectDoor_ || doors_[result] == prize::open)
 		{
-			result = doors_[randomGen(doors_.size())];
+			result = randomGen(doors_.size());
 		}
 	}
 
-	return result;
+	return doors_[result];
 }
 
 size_t LetsMakeADeal::randomGen(const size_t maxNum) 
