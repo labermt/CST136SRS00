@@ -12,14 +12,13 @@ strategy_{strategy}
 	//Populate vector with a 0 (goat) for each door
 	for (size_t i{ 0 }; i < numDoors; i++)
 	{
-		doors_.push_back(false);
+		doors_.push_back(prize::closed);
 	}
 
-	//Place the car
-	doors_[carDoor_] = true;
+	doors_[carDoor_] = prize::car;
 }
 
-bool LetsMakeADeal::runGame()
+LetsMakeADeal::prize LetsMakeADeal::runGame()
 {
 	// Open all numDisclose_ number of doors and remove them from doors_
 	for (size_t i{ 0 }; i < numDisclose_; i++)
@@ -30,17 +29,17 @@ bool LetsMakeADeal::runGame()
 		{
 			discloseDoor = randomGen(numDoors_ - i);
 		}
-		doors_.erase(doors_.begin() + discloseDoor);
+		doors_[discloseDoor] = prize::open;
 	}
 
-	bool result = doors_[selectDoor_];
+	prize result = doors_[selectDoor_];
 
 	// If the switch option is set, pick another unopened door
 	if (strategy_ == choice::willswitch)
 	{
 		while (result == doors_[selectDoor_])
 		{
-			result = randomGen(doors_.size());
+			result = doors_[randomGen(doors_.size())];
 		}
 	}
 
