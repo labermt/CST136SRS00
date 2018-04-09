@@ -7,39 +7,6 @@ Class ID: Volbeat
 
 ---
 
-PseudoCode:
-
-Class will contain data members:
-- Vector to store the ordered contents of their doors
-
-
-Class member fuctions:
-- setter for # of doors
-- setter for # pre-disclosed doors
-- setter for door car is behind
-- function(s) to calculate probabilites
-
-Will use std::vector for storing the doors and their contents
-Will use gsl::span as the container to store instances of the class
-Main loop will keep track of probabilities and average them
-Then, output the probability of obtaining a car with selected choice
-
-* Command line help:
-
----
-
-Making a deal algorithm
-
-- set vector to size of #doors with
-- first element 1, rest 0 (1 = car, 0 = goat)
-- randomly choose any door (selectDoor)
-- remove a random door thats not selectDoor or 1st element from the vector for disclose # of times 
-- now the 1st element is the car, and there are (#doors - #disclose) "0" elements after it
-- if stay, return value of selectDoor element
-- if switch, randomly pick another door (not selectDoor) and return value
-
----
-
 Purpose: 
 
 - Use the command line parameters for input
