@@ -4,7 +4,7 @@
 #include <random>
 
 
-unsigned LetsMakeADeal::get_random_door_index(unsigned const max_door) const
+unsigned LetsMakeADeal::get_random_door_index(unsigned max_door) const
 {
 	auto result{0};
 	// generate random number
@@ -14,7 +14,7 @@ unsigned LetsMakeADeal::get_random_door_index(unsigned const max_door) const
 	return result;
 }
 
-void LetsMakeADeal::set_prize(std::vector<unsigned> game_instance, unsigned location)
+void LetsMakeADeal::set_prize(std::vector<unsigned> game_instance, unsigned const location)
 {
 	
 }
