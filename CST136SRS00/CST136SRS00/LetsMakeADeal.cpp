@@ -38,6 +38,7 @@ void LetsMakeADeal::playGame()
 	int tempDoor;
 	for (int i = 0; i < numDisclosedDoors;)
 	{
+		distr = std::uniform_int_distribution<int>(0, doors.size() - 1);
 		tempDoor = distr(generator);
 		if (tempDoor != chosenDoor && doors[tempDoor] != true) {
 			doors.erase(doors.begin() + tempDoor);
