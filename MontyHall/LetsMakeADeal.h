@@ -12,8 +12,8 @@ private:
 	unsigned open_doors_{};
 	strategy strat_{};
 
-	unsigned get_random_door_index(unsigned const max_door) const;
-	void set_prize(std::vector<unsigned> game_instance, unsigned location);
+	unsigned get_random_door_index(unsigned max_door) const;
+	void set_prize(std::vector<unsigned> game_instance, unsigned const location);
 
 public:
 	LetsMakeADeal(unsigned doors, unsigned open_doors, std::string strat);
