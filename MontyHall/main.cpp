@@ -19,7 +19,7 @@ static void showUsage(std::string name)
 
 int main( int argc, char* argv[] )
 {
-	if (argc < 4) 
+	if (argc < 1) 
 	{
 		showUsage(argv[0]);
 		return 1;
@@ -40,10 +40,15 @@ int main( int argc, char* argv[] )
 		std::cout << doors;
 	}
 
+	std::istringstream isr(argv[2]);
+
+
+	/*
 	if ((iss >> doors) && iss.eof()) // Check eofbit
 	{
 		// Conversion successful
 	}
+	*/
 
 	size_t open;
 
