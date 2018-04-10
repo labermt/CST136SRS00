@@ -28,6 +28,7 @@ void LetsMakeADeal::set_car(std::vector<door_states> &game_instance)
 
 unsigned LetsMakeADeal::get_rand_door() const
 {
+	//TODO: understand how / why this works
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	//can this really be const when running the game multiple times?
@@ -37,7 +38,7 @@ unsigned LetsMakeADeal::get_rand_door() const
 	return result;
 }
 
-unsigned LetsMakeADeal::guess_door(std::vector<door_states>& game_instance)
+unsigned LetsMakeADeal::guess_door(std::vector<door_states> &game_instance) const
 {
 	//need to change this, unless 2 states can be stored in a vector? multi dimentional array?
 	auto guess = get_rand_door();
@@ -67,7 +68,7 @@ bool LetsMakeADeal::run_game()
 	set_car(game_instance);
 	auto guess = guess_door(game_instance);
 	std::vector<unsigned> guessed_doors{guess};
-	for (auto i = 0; i < open_doors_; ++i)
+	for (unsigned i = 0; i < open_doors_; ++i)
 	{
 		open_random_door(game_instance);
 	}
@@ -75,8 +76,9 @@ bool LetsMakeADeal::run_game()
 	if (strat_ == change)
 	{
 		guess = guess_door(game_instance);
-		//untested code
-		while (std::find(std::begin(guessed_doors), std::end(guessed_doors), guess) == std::end(guessed_doors) )
+		//untested code if this evaluates to true, it found the door number of guess to be in the guessed doors vector
+		//and so it guesses again until it finds a door that isnt open, or hasn't been guessed yet.
+		while (std::find(std::begin(guessed_doors), std::end(guessed_doors), guess) != std::end(guessed_doors) )
 		{
 			guess = guess_door(game_instance);
 			guessed_doors.push_back(guess);
