@@ -37,15 +37,15 @@ unsigned LetsMakeADeal::get_rand_door() const
 	return result;
 }
 
-void LetsMakeADeal::guess_door(std::vector<door_states>& game_instance)
+unsigned LetsMakeADeal::guess_door(std::vector<door_states>& game_instance)
 {
 	//need to change this, unless 2 states can be stored in a vector? multi dimentional array?
 	auto guess = get_rand_door();
-	while (game_instance[guess] == opened || game_instance[guess] == guessed)
+	while (game_instance[guess] == opened)
 	{
 		guess = get_rand_door();
 	}
-	 game_instance[guess] == guessed;
+	 return guess;
 }
 
 LetsMakeADeal::LetsMakeADeal(unsigned const doors, unsigned const open_doors, std::string const strat) :
@@ -66,6 +66,7 @@ bool LetsMakeADeal::run_game()
 	std::vector<door_states> game_instance{doors_, goat};
 	set_car(game_instance);
 	auto guess = guess_door(game_instance);
+	std::vector<unsigned> guessed_doors{guess};
 	for (auto i = 0; i < open_doors_; ++i)
 	{
 		open_random_door(game_instance);
@@ -74,6 +75,12 @@ bool LetsMakeADeal::run_game()
 	if (strat_ == change)
 	{
 		guess = guess_door(game_instance);
+		//untested code
+		while (std::find(std::begin(guessed_doors), std::end(guessed_doors), guess) == std::end(guessed_doors) )
+		{
+			guess = guess_door(game_instance);
+			guessed_doors.push_back(guess);
+		}
 	}
 	if (game_instance[guess]==car)
 	{
