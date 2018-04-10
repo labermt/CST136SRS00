@@ -71,7 +71,7 @@ bool LetsMakeADeal::run_game()
 	{
 		open_random_door(game_instance);
 	}
-	auto result = false;
+	auto won = false;
 	if (strat_ == change)
 	{
 		guess = guess_door(game_instance);
@@ -84,8 +84,8 @@ bool LetsMakeADeal::run_game()
 	}
 	if (game_instance[guess]==car)
 	{
-		result = true;
+		won = true;
 	}
 
-	return result;
+	return won;
 }
