@@ -27,7 +27,8 @@ int main(/*unsigned const games = 0, std::string const strat = "null", unsigned 
 		auto strat = "stay";
 		auto const total_doors{doors - open_doors};
 		auto wins{0.0};
-		
+		//use something like this to meet spec?
+		//std::vector<LetsMakeADeal> game_instaces(games);
 		for(auto i = 0; i < games;i++)
 		{
 			LetsMakeADeal game(doors, open_doors,strat);
