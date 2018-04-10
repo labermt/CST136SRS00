@@ -1,7 +1,10 @@
 # CST136SRS00
 Monty Hall
 
-Name: 
+Class ID: Ralts
+SRS ID: CST136SRS00
+
+Notes: 
 
 ---
 
