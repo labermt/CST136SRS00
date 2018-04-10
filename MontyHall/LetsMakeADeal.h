@@ -1,21 +1,23 @@
 #pragma once
 #include <vector>
+#include <random>
 
 class LetsMakeADeal
 {
 
 private:
 	enum strategy {stay, change};
-	enum prize{goat, car};
+	enum door_states{goat, car, opened};
 	
-	unsigned doors_{};
-	unsigned open_doors_{};
+	unsigned doors_{3};
+	unsigned open_doors_{1};
 	strategy strat_{};
 
-	unsigned get_random_door_index(unsigned max_door) const;
-	void set_prize(std::vector<unsigned> game_instance, unsigned const location);
+	void open_random_door(std::vector<door_states>& game_instance);
+	void set_car(std::vector<door_states> &game_instance);
+	unsigned get_rand_num() const;
 
 public:
-	LetsMakeADeal(unsigned doors, unsigned open_doors, std::string strat);
+	LetsMakeADeal(unsigned const doors, unsigned const open_doors, std::string const strat);
 	bool run_game();
 };

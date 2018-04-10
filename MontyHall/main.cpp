@@ -3,10 +3,10 @@
 #include "LetsMakeADeal.h"
 #include <string>
 
-
-int main(unsigned const games = 0, std::string const strat = "null", unsigned const doors = 3, unsigned const open_doors = 1 )
+//this isnt working right
+int main(/*unsigned const games = 0, std::string const strat = "null", unsigned const doors = 3, unsigned const open_doors = 1*/ )
 {
-	if(games == 0 || strat == "null" )
+	/*if(games == 0 || strat == "null" )
 	{
 		std::cout << "The arguement order should be [0] number of games you want to run";
 		std::cout << ", [1] your strategy 'stay' or 'change'";
@@ -19,18 +19,22 @@ int main(unsigned const games = 0, std::string const strat = "null", unsigned co
 		std::cout << "Please rerun the program with argument[1] being 'stay' or 'change'.";
 		std::cout << "Example: 'LetsMakeADeal.exe 100 stay 5 2'";
 	}
-	else
+	else*/
 	{
-		unsigned const total_doors{doors - open_doors};
+		auto doors = 3;
+		auto open_doors = 1;
+		auto games = 1;
+		auto strat = "stay";
+		auto const total_doors{doors - open_doors};
 		auto wins{0.0};
 		
-		for(int i = 0; i < games;i++)
+		for(auto i = 0; i < games;i++)
 		{
 			LetsMakeADeal game(doors, open_doors,strat);
 			if(game.run_game() ){++wins;}
 		}
 		auto win_percent{wins / games};
-		double probability{1.0/total_doors};
+		auto probability{1.0/total_doors};
 	}
     return 0;
 }
