@@ -15,7 +15,7 @@ void LetsMakeADeal::open_random_door(std::vector<door_states> &game_instance)
 	game_instance[door] = opened;
 }
 
-void LetsMakeADeal::set_car(std::vector<door_states> &game_instance)
+void LetsMakeADeal::set_car()
 {
 	// not sure if this and the function can be const or not? Resharper lies??
 	auto door{get_rand_door()};
@@ -29,10 +29,10 @@ void LetsMakeADeal::set_car(std::vector<door_states> &game_instance)
 unsigned LetsMakeADeal::get_rand_door() const
 {
 	//TODO: understand how / why this works
-	std::random_device rd;
-	std::mt19937 gen(rd());
+	static std::random_device rd;
+	static std::mt19937 gen(rd());
 	//can this really be const when running the game multiple times?
-	std::uniform_int_distribution<> const rand_door(0, doors_);
+	static std::uniform_int_distribution<> rand_door(0, doors_-1);
 	
 	auto const result = rand_door(gen);
 	return result;
@@ -90,4 +90,9 @@ bool LetsMakeADeal::run_game()
 	}
 
 	return won;
+}
+
+LetsMakeADeal::result LetsMakeADeal::get_result() const
+{
+	return result_;
 }

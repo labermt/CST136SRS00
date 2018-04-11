@@ -3,8 +3,8 @@
 #include "LetsMakeADeal.h"
 #include <string>
 
-//this isnt working right
-int main(/*unsigned const games = 0, std::string const strat = "null", unsigned const doors = 3, unsigned const open_doors = 1*/ )
+//use string stream parse command line arguments
+int main( int argc, char* argv[] )
 {
 	/*if(games == 0 || strat == "null" )
 	{
@@ -15,9 +15,10 @@ int main(/*unsigned const games = 0, std::string const strat = "null", unsigned 
 	}
 	else if (strat != "stay" || strat != "change" )
 	{
-		std::cout << "It appears you entered an invalid strategy, case is important.\n";
-		std::cout << "Please rerun the program with argument[1] being 'stay' or 'change'.";
-		std::cout << "Example: 'MontyHall.exe 100 stay 5 2'";
+		std::cout << 
+		"It appears you entered an invalid strategy, case is important.\n"
+		"Please rerun the program with argument[1] being 'stay' or 'change'."
+		"Example: 'MontyHall.exe 100 stay 5 2'";
 	}
 	else if (doors < open_doors +2)
 	{
@@ -34,11 +35,26 @@ int main(/*unsigned const games = 0, std::string const strat = "null", unsigned 
 		auto const total_doors{doors - open_doors};
 		auto wins{0.0};
 		//use something like this to meet spec?
-		//std::vector<LetsMakeADeal> game_instaces(games);
-		for(auto i = 0; i < games;i++)
+		std::vector<LetsMakeADeal> game_list;
+		game_list.reserve(games);
+		
+		for (auto i = 0; i < games; i++)
 		{
-			LetsMakeADeal game(doors, open_doors,strat);
-			if(game.run_game() ){++wins;}
+			LetsMakeADeal game(doors, open_doors, strat);
+			game_list.emplace_back(game);
+		}
+
+		for (auto &game : game_list)
+		{
+			game.run_game();
+		}
+
+		for (auto &game : game_list)
+		{
+			if (game.get_result() == LetsMakeADeal::result::won)
+			{
+				++wins;
+			}
 		}
 		auto win_percent{wins / games};
 		auto probability{1.0/total_doors};
