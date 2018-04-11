@@ -5,6 +5,59 @@ Name: Andrew Deraita
 
 Class ID: Volbeat
 
+
+---
+
+
+lookup: knuth's S algorithm for opening doors
+add example for help
+
+
+Psudeo for Input parameters:
+
+want command line to look like this:
+
+MontyHall.exe -d 3 -o 1 -i 1 -s stay
+
+where -d is the number of doors
+where -o is the number of doors to open
+where -i is the number of game instances to run
+where -s is the strategy (switch or stay)
+
+so argv[] will look like this {"-d", "3", "-o", "1", "-i", "1", "-s", "stay"} for this example
+
+so parsing will involve looping through each argv[i], starting with 1 (not 0)
+
+first, set default values for doors, open, instances, and strategy
+
+bool fail = false; (flag for if any command line params are invalid)
+
+if first char of argv[i] is "-", then the following is a command
+	switch(second char of argv[i]):
+		doors:
+			compare argv[i] (minus the -) to "d"
+			if it is, increment i
+			look at argv[i], istream it to an int.
+			if successful, assign to doorsP variable (param class data member?) for the door parameter
+			else fail = true;
+		open:
+			same with doors
+		instance:
+			same with doors
+		strategy:
+			same with doors except have to do strncmp for the second parameter
+		default: (this is for when )
+			fail = true;
+
+if *(argv[1]) != '-', then fail = true;
+
+
+
+
+if a parameter is missing, just use default value.
+
+
+
 ---
 
 Purpose: 
