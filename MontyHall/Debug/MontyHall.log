@@ -1,2 +1,2 @@
-﻿  LetsMakeADeal.cpp
-c:\users\jen\desktop\cst136\cst136srs00\montyhall\letsmakeadeal.cpp(27): error C4716: 'LetsMakeADeal::randomDoor': must return a value
+﻿  main.cpp
+  MontyHall.vcxproj -> C:\Users\jen\Desktop\CST136\CST136SRS00\Debug\MontyHall.exe
