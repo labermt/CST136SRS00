@@ -1,4 +1,6 @@
 # CST136SRS00
+---
+
 Monty Hall
 
 Name: Andrew Deraita
@@ -7,22 +9,37 @@ Class ID: Volbeat
 
 
 ---
+### Program options:
+
+
+Option | Description | Range
+--- | --- | ---
+`-d, --doors` | number of doors | `unsigned int`
+`-o, --open` | number of doors to open | `unsigned int`
+`-i, --instances` | number of game instances| `unsigned int`
+`-s, --strategy` | door selection strategy | `switch or stay`
+
+
+Some or all of the parameters may be input.
+
+The default values are:
+
+- 3 doors
+- 1 open
+- 1 instance
+- stay strategy
+
+The open parameter may not be more than (doors - 2).
+If any parameter is intered incorrectly, a help menu will display.
+
+Once the program has acceptable input parameters, it will display the resulting probability
+of winning a car.
+
+---
+### Notes to self:
 
 
 lookup: knuth's S algorithm for opening doors
-add example for help
-
-
-Psudeo for Input parameters:
-
-want command line to look like this:
-
-MontyHall.exe -d 3 -o 1 -i 1 -s stay
-
-where -d is the number of doors
-where -o is the number of doors to open
-where -i is the number of game instances to run
-where -s is the strategy (switch or stay)
 
 so argv[] will look like this {"-d", "3", "-o", "1", "-i", "1", "-s", "stay"} for this example
 
@@ -57,8 +74,9 @@ if *(argv[1]) != '-', then fail = true;
 if a parameter is missing, just use default value.
 
 
-
 ---
+### SRS Details
+
 
 Purpose: 
 
