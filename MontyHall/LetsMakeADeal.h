@@ -14,6 +14,5 @@ private:
 	bool stay_ = true;  //switch or stay doors, run at rungame
 	size_t chosenDoor_; 
 	std::vector<behindTheDoor> doors_{finalLength_}; 
-	//size_t finalLength
 };
 

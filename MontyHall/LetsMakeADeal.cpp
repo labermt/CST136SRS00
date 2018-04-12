@@ -9,7 +9,7 @@ LetsMakeADeal::LetsMakeADeal(size_t numOfDoors, size_t openDoors) :
 	finalLength_{ numOfDoors - openDoors },
 	chosenDoor_{}
 {
-	for (size_t i{}; i < finalLength_ ;i++)
+	for (size_t i{}; i < finalLength_;i++)
 	{
 		doors_[i] = behindTheDoor::goat;//this puts a goat in each door
 	}
