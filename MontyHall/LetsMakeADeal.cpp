@@ -15,22 +15,21 @@ bool LetsMakeADeal::simulateGame() const
 {
 	const auto carDoor{ getRandomInt(0, doors_) };
 	auto selDoor{ getRandomInt(0, doors_) };
-	std::vector<bool> doorOpened(doors_);
+	std::vector<bool> openedDoors(doors_);
 	auto doorsOpen = 0;
 	while(doorsOpen < reveal_)
 	{
 		const auto doorToOpen{ getRandomInt(0, doors_) };
-		if(doorToOpen != carDoor && doorToOpen != selDoor && !doorOpened[doorToOpen])
+		if(doorToOpen != carDoor && doorToOpen != selDoor && !openedDoors[doorToOpen])
 		{
-			doorOpened[doorToOpen] = true;
+			openedDoors[doorToOpen] = true;
 			doorsOpen++;
 		}
 	}
 	if(strategy_ == Strategy::kSwitch)
 	{
-		//std::cout << "SWITCH" << std::endl;
-		int newSelDoor = selDoor;
-		while(newSelDoor == selDoor || doorOpened[newSelDoor])
+		auto newSelDoor = selDoor;
+		while(newSelDoor == selDoor || openedDoors[newSelDoor])
 		{
 			newSelDoor = getRandomInt(0, doors_);
 		}
