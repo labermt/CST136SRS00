@@ -5,9 +5,28 @@
 #ifndef MONTYHALL_LETSMAKEADEAL_H
 #define MONTYHALL_LETSMAKEADEAL_H
 
+#include <iostream>
+#include <random>
 
 class LetsMakeADeal {
+public:
+    void setNumOfDoors(int numDoors);
+    void setNumOfDoorsToReveal(int numDoorsToReveal);
+    void setNumOfGameInstances(int numGameInstances);
 
+    int randomNumber(int max);
+    void createDoors(int carLocation);
+    void printArray();
+    void revealDoors();
+
+
+
+private:
+    int numOfDoors;
+    int numOfDoorsToReveal;
+    int numOfGameInstances;
+    int carLocation;
+    int * doorArray;
 };
 
 
