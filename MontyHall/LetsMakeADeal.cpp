@@ -58,13 +58,13 @@ LetsMakeADeal::LetsMakeADeal(int const doors, int const open_doors, std::string 
 void LetsMakeADeal::display_help()
 {
 	std::cout << "\nThere was an error with your input. Please follow the guidelines below and rerun the program.\n\n"
-		"Parameter format is as follows\n'-doors' followed by a number for the number of doors you would like in the game,\n"
+		"Parameter format:\n-doors followed by a number for the number of doors you would like in the game,\n"
 		"-open followed by a number for the amount of doors you would like to open,\n"
 		"-games followed by a number for the amount of games you would like to run,\n"
 		"-strategy followed by either 'change' or 'stay' for your strategy of changing doors or not.\n\n"
-		"Notes: parameters can be in any order, -doors , and -open are optional parameters (they default to 3 and 1 respectivly)\n"
+		"Notes: \nparameters can be in any order,\n-doors , and -open are optional parameters (they default to 3 and 1 respectivly)\n"
 		"-games needs to be be > 0, \n"
-		"and lastly if you provide -doors and / or -open parameters doors needs to be +2 more than open doors otherwise, whats the point?\n"
+		"if you provide -doors and / or -open parameters doors needs to be +2 more than open doors otherwise, whats the point?\n"
 		"Example: 'MontyHall.exe -games 100 -strategy stay -doors 5 -open 2'" << std::endl;
 }
 
