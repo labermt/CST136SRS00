@@ -3,9 +3,6 @@
 #include <vector>
 #include "LetsMakeADeal.h"
 
-// TODO: Remove
-#include <iostream>
-
 LetsMakeADeal::LetsMakeADeal(const int& doors, const int& reveal, const Strategy& strategy) : 
 doors_{ doors },
 reveal_{ reveal },
@@ -45,6 +42,6 @@ bool LetsMakeADeal::simulateGame() const
 int LetsMakeADeal::getRandomInt(const int lower, const int upper)
 {
 	static std::mt19937 seed{ 42 };
-	std::uniform_int_distribution<> dis(lower, upper - 1); // Open-closed; not pandering to Mitch, don't worry 'bout it
+	const std::uniform_int_distribution<> dis(lower, upper - 1); // Open-closed; not pandering to Mitch, don't worry 'bout it
 	return dis(seed);
 }
