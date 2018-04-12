@@ -57,3 +57,15 @@ size_t LetsMakeADeal::randomGen(const size_t numDoors)
 	return dis( gen );
 }
 
+std::ostream& operator<<(std::ostream& os, const LetsMakeADeal::choice& choice)
+{
+	if ( choice == LetsMakeADeal::choice::stay)
+	{
+	os << "stay";
+	}
+	else
+	{
+	os << "switch";
+	}
+	return os;
+}

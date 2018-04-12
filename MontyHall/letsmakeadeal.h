@@ -25,3 +25,5 @@ public:
 private:
 	static size_t randomGen(size_t);
 };
+
+std::ostream& operator<<(std::ostream&, const LetsMakeADeal::choice&);

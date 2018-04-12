@@ -1,5 +1,4 @@
 // main.cpp : Defines the entry point for the console application.
-//TODO: tally results of runGame() to find probability of success with given paramaters
 //TODO: change to "S algorithm" for selecting doors to open.
 //
 
@@ -7,6 +6,8 @@
 #include "letsmakeadeal.h"
 #include <iostream>
 #include <sstream>
+#include <iomanip>
+#include <cassert>
 
 static void showUsage()
 {
@@ -21,23 +22,24 @@ static void showUsage()
 		"\n"
 		"\t Example(s):\n"
 		"\n"
-		"\t MontyHall.exe -doors 3 -open 1 -instances 1 -strategy stay\n"
-		"\t MontyHall.exe -d 5 -o 3 -s switch -instances 100\n"
-		"\t MontyHall.exe -d 30 -instances 5\n"
+		"\t MontyHall.exe --doors 3 --open 1 --instances 100 --strategy stay\n"
+		"\t MontyHall.exe -d 5 -o 3 -s switch --instances 1000\n"
+		"\t MontyHall.exe -d 30 --instances 500\n"
 		"\n"
 		"\t See README.md for details.\n"
 		<< std::endl;
 }
 
-int main( int argc, char* argv[] )
+int main(const int argc, char* argv[] )
 {
-	//default choices for input parameters
+	// Default choices for input parameters
 	size_t doorParam{ 3 };
 	size_t openParam{ 1 };
-	size_t instancesParam{ 1 };
-	LetsMakeADeal::choice strategyParam{ LetsMakeADeal::choice::stay };
+	size_t instancesParam{ 100 };
+	auto strategyParam{ LetsMakeADeal::choice::stay };
 	auto failedParse = false;
 
+	// Parse input parameters
 	for ( size_t i{ 1 }; i < argc; i++)
 	{
 		const auto parameter = std::string(argv[i]);
@@ -96,37 +98,50 @@ int main( int argc, char* argv[] )
 		}
 	}
 
-	if ( failedParse )
+	// Show help if input parameters are in error, or invalid doors / open doors
+	if ( failedParse || doorParam <= openParam + 1 )
 	{
 		showUsage();
 		return 0;
 	}
 
 
+	// Variables for games / tallies
 	std::vector<LetsMakeADeal> games;
-	auto numCars{ 0 };
-	auto numGoats{ 0 };
-	auto probabilityCar{ 0.0 };
-	auto probabilityGoat{ 0.0 };
+	auto carTally{ 0 };
+	auto goatTally{ 0 };
 
+	// Run the games
 	for ( auto i{ 0 }; i < instancesParam; i++)
 	{
 		games.push_back(LetsMakeADeal(doorParam, openParam, strategyParam));
 
 		if ( games[i].runGame() == LetsMakeADeal::prize::car)
 		{
-			numCars++;
+			carTally++;
 		}
 		else
 		{
-			numGoats++;
+			goatTally++;
 		}
 	}
 
-	probabilityCar = double(numCars) / double(numCars + numGoats);
-	probabilityGoat = double(numGoats) / double(numCars + numGoats);
+	const auto probabilityCar = double(carTally) / double(carTally + goatTally);
+	const auto probabilityGoat = double(goatTally) / double(carTally + goatTally);
 
-	
+	assert(98 <= probabilityCar + probabilityGoat <= 100);
+
+	// Output the results
+	std::cout << "\n The probability of winning a car is "
+		<< std::setprecision(3) << probabilityCar * 100 << "%";
+	std::cout << " if there are "
+		<< doorParam << " doors, \n of which "
+		<< openParam << " doors are(is) opened and the contenstant chose to "
+		<< strategyParam << ".\n\n";
+
+	std::cout << " This was calculated over "
+		<< instancesParam << " simulations of the game.\n";
+
     return 0;
 }
 
