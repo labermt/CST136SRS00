@@ -100,7 +100,7 @@ int main(int const argc, char* argv[])
 		auto const loss_percent{ losses / games };
 
 		std::cout << "Out of " << games << " game(s) you won "
-			<< win_percent << "% of the time." << std::endl;
+			<< wins << " which is "<< win_percent*100 <<"%. or to meet spec"<<  << std::endl;
 		assert(win_percent + loss_percent > .999999 && win_percent + loss_percent < 1.000001);
 	}
 	return 0;
