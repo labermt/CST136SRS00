@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include <random>
+#include <string>
 
 class LetsMakeADeal
 {
@@ -14,20 +14,21 @@ public:
 	enum class result { lost, won };
 
 private:
-	int doors_{ 3 };
-	int open_doors_{ 1 };
-	int guess_{-1};
+	int doors_{};
+	int open_doors_{};
+	int guess_{ -1 };
 	result result_{};
 	strategy strat_{};
-	
+
 
 	void open_random_door();
 	void set_car();
 	unsigned get_rand_door() const;
-	void guess_door() ;
+	void guess_door();
 
 public:
 	LetsMakeADeal(int const doors, int const open_doors, std::string const strat);
+	static void display_help();
 	void run_game();
 	result get_result() const;
 };

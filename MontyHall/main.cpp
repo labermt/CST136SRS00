@@ -3,41 +3,74 @@
 #include "LetsMakeADeal.h"
 #include <string>
 #include <cassert>
+#include <complex>
 
-//use string stream parse command line arguments
-int main( int argc, char* argv[] )
+int main(int const argc, char* argv[])
 {
-	/*if(games == 0 || strat == "null" )
+	auto doors = 3;
+	auto open_doors = 1;
+	std::string strat = "unknown";
+	auto games = 0;
+	auto fault = false;
+
+	if ((argc - 1) / 2 < 2)
 	{
-		std::cout << "The arguement order should be [0] number of games you want to run";
-		std::cout << ", [1] your strategy 'stay' or 'change'";
-		std::cout << ", [2] number of doors in the game, [3] number of doors you would like to be opened\nPlease rerun the program with the correct argument format.\n";
-		std::cout << "Example: 'MontyHall.exe 100 stay 5 2'";
+		fault = true;
 	}
-	else if (strat != "stay" || strat != "change" )
+	else
 	{
-		std::cout << 
-		"It appears you entered an invalid strategy, case is important.\n"
-		"Please rerun the program with argument[1] being 'stay' or 'change'."
-		"Example: 'MontyHall.exe 100 stay 5 2'";
+		for (auto i = 1; i < argc; i += 2)
+		{
+
+			switch (argv[i][1])
+			{
+			case 'd':
+			{
+				std::istringstream iss(argv[i + 1]);
+				iss >> doors;
+				break;
+			}
+			case 'o':
+			{
+				std::istringstream iss(argv[i + 1]);
+				iss >> open_doors;
+				break;
+			}
+			case 's':
+			{
+				std::istringstream iss(argv[i + 1]);
+				iss >> strat;
+				if (strat == "stay" || strat == "change")
+				{
+					break;
+				}
+				fault = true;
+				break;
+			}
+			case 'g':
+			{
+				std::istringstream iss(argv[i + 1]);
+				iss >> games;
+				break;
+			}
+			default:
+			{
+				fault = true;
+				break;
+			}
+			}
+		}
 	}
-	else if (doors < open_doors +2)
+
+	if (games == 0 || fault || doors < open_doors + 2)
 	{
-		std::cout << "It appears you entered an invaild number of doors  vs doors you want to open.\n";
-		std::cout << "Please rerun the program with a number of doors at least 2 more than the doors you want to open.\n";
-		std::cout << "In the following order, [0] Times to run, [1] Strategy 'stay' or 'switch' [2] Total doors, [3] Doors to open.\n";
-		std::cout << "Example: MontyHall.exe 100 stay 5 2";
-	else*/
+		LetsMakeADeal::display_help();
+	}
+	else
 	{
-		auto doors = 3;
-		auto open_doors = 1;
-		auto games = 5;
-		auto strat = "stay";
-		auto const total_doors{doors - open_doors};
-		auto wins{0.0};
-		
 		std::vector<LetsMakeADeal> game_list;
 		game_list.reserve(games);
+
 		for (auto i = 0; i < games; i++)
 		{
 			LetsMakeADeal game(doors, open_doors, strat);
@@ -49,20 +82,26 @@ int main( int argc, char* argv[] )
 			game.run_game();
 		}
 
+		auto wins{ 0.0 };
+		auto losses{ 0.0 };
+
 		for (auto &game : game_list)
 		{
 			if (game.get_result() == LetsMakeADeal::result::won)
 			{
 				++wins;
 			}
+			else
+			{
+				++losses;
+			}
 		}
-		auto const win_percent{wins / games};
-		
-		std::cout << "Out of "<< games <<
-					 " game(s) you won " << win_percent << "% of them" << std::endl;
+		auto const win_percent{ wins / games };
+		auto const loss_percent{ losses / games };
+
+		std::cout << "Out of " << games << " game(s) you won "
+			<< win_percent << "% of the time." << std::endl;
+		assert(win_percent + loss_percent > .999999 && win_percent + loss_percent < 1.000001);
 	}
-    return 0;
+	return 0;
 }
-//TODO: figure out issues with input parameters.
-//TODO: workout infinite loops if somehow all doors get opened guessing will keep guessing / go out of bounds somehow?
-//TODO: final math described in readme.
