@@ -8,23 +8,26 @@ class LetsMakeADeal
 private:
 	enum class strategy { stay, change };
 	enum class door_states { goat, car, opened };
+	std::vector<door_states> game_{};
 
 public:
-	enum class result { lost, won  };
+	enum class result { lost, won };
 
 private:
-	unsigned doors_{3};
-	unsigned open_doors_{1};
+	int doors_{ 3 };
+	int open_doors_{ 1 };
+	int guess_{-1};
 	result result_{};
 	strategy strat_{};
+	
 
-	void open_random_door(std::vector<door_states> &game_instance);
-	void set_car(std::vector<door_states> &game_instance);
+	void open_random_door();
+	void set_car();
 	unsigned get_rand_door() const;
-	unsigned guess_door(std::vector<door_states> &game_instance) const;
+	void guess_door() ;
 
 public:
-	LetsMakeADeal(unsigned const doors, unsigned const open_doors, std::string const strat);
+	LetsMakeADeal(int const doors, int const open_doors, std::string const strat);
 	bool run_game();
 	result get_result() const;
 };

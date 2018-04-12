@@ -4,87 +4,70 @@
 #include <random>
 
 
-void LetsMakeADeal::open_random_door(std::vector<door_states> &game_instance)
+void LetsMakeADeal::open_random_door()
 {
-	auto door{get_rand_door()};
-	while (game_instance[door]!= goat)
+	auto door{ get_rand_door() };
+	while (game_[door] != door_states::goat)
 	{
 		door = get_rand_door();
 	}
 
-	game_instance[door] = opened;
+	game_[door] = door_states::opened;
 }
 
 void LetsMakeADeal::set_car()
 {
-	// not sure if this and the function can be const or not? Resharper lies??
-	auto door{get_rand_door()};
-	while(game_instance[door] != goat)
-	{
-		door = get_rand_door();
-	}
-	game_instance[door] = car;
+	game_[get_rand_door()] = door_states::car;
 }
 
 unsigned LetsMakeADeal::get_rand_door() const
 {
-	//TODO: understand how / why this works
-	static std::random_device rd;
-	static std::mt19937 gen(rd());
-	//can this really be const when running the game multiple times?
-	static std::uniform_int_distribution<> rand_door(0, doors_-1);
-	
+	 std::random_device rd;
+	 std::mt19937 gen(rd());
+	 std::uniform_int_distribution<> rand_door(0, doors_ - 1);
+
 	auto const result = rand_door(gen);
 	return result;
 }
 
-unsigned LetsMakeADeal::guess_door(std::vector<door_states> &game_instance) const
+void LetsMakeADeal::guess_door() 
 {
-	//need to change this, unless 2 states can be stored in a vector? multi dimentional array?
 	auto guess = get_rand_door();
-	while (game_instance[guess] == opened)
+	while (game_[guess] == door_states::opened || guess_ == guess)
 	{
 		guess = get_rand_door();
 	}
-	 return guess;
+	guess_= guess;
 }
 
-LetsMakeADeal::LetsMakeADeal(unsigned const doors, unsigned const open_doors, std::string const strat) :
+LetsMakeADeal::LetsMakeADeal(int const doors, int const open_doors, std::string const strat) :
 	doors_{ doors }, open_doors_{ open_doors }
 {
 	if (strat.compare("stay") == 0)
 	{
-		strat_ = stay;
+		strat_ = strategy::stay;
 	}
 	else
 	{
-		strat_ = change;
+		strat_ = strategy::change;
 	}
+	game_.assign(doors, door_states::goat);
 }
 
 bool LetsMakeADeal::run_game()
 {
-	std::vector<door_states> game_instance{doors_, goat};
-	set_car(game_instance);
-	auto guess = guess_door(game_instance);
-	std::vector<unsigned> guessed_doors{guess};
-	for (unsigned i = 0; i < open_doors_; ++i)
+	set_car();
+	for (auto i = 0; i < open_doors_; ++i)
 	{
-		open_random_door(game_instance);
+		open_random_door();
 	}
+	guess_door();
 	auto won = false;
-	if (strat_ == change)
+	if (strat_ == strategy::change)
 	{
-		guess = guess_door(game_instance);
-		//untested code if this evaluates to true, it found the door number of guess to be in the guessed doors vector
-		//and so it guesses again until it finds a door that isnt open, or hasn't been guessed yet.
-		while (std::find(std::begin(guessed_doors), std::end(guessed_doors), guess) != std::end(guessed_doors) )
-		{
-			guess = guess_door(game_instance);
-			guessed_doors.push_back(guess);
-		}
+		guess_door();
 	}
-	if (game_instance[guess]==car)
+	if (game_[guess_] == door_states::car)
 	{
 		won = true;
 	}

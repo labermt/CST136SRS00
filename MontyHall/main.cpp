@@ -2,6 +2,7 @@
 #include <iostream>
 #include "LetsMakeADeal.h"
 #include <string>
+#include <cassert>
 
 //use string stream parse command line arguments
 int main( int argc, char* argv[] )
@@ -30,14 +31,13 @@ int main( int argc, char* argv[] )
 	{
 		auto doors = 3;
 		auto open_doors = 1;
-		auto games = 1;
+		auto games = 5;
 		auto strat = "stay";
 		auto const total_doors{doors - open_doors};
 		auto wins{0.0};
-		//use something like this to meet spec?
+		
 		std::vector<LetsMakeADeal> game_list;
 		game_list.reserve(games);
-		
 		for (auto i = 0; i < games; i++)
 		{
 			LetsMakeADeal game(doors, open_doors, strat);
@@ -56,15 +56,13 @@ int main( int argc, char* argv[] )
 				++wins;
 			}
 		}
-		auto win_percent{wins / games};
-		auto probability{1.0/total_doors};
-
+		auto const win_percent{wins / games};
+		
+		std::cout << "Out of "<< games <<
+					 " game(s) you won " << win_percent << "% of them" << std::endl;
 	}
     return 0;
 }
 //TODO: figure out issues with input parameters.
 //TODO: workout infinite loops if somehow all doors get opened guessing will keep guessing / go out of bounds somehow?
-//TODO: change doors to a multi dimational array, will that allow 2 states to be saved? example door1 = opened + goat?
-//TODO: fix out of bounds issue with guessing. I am not sure if that is the cause of the problem, bounds are set to be between 0 and # of doors.
-//TODO: final math described in readme. line 36: unsure how, line 34: 
-//TODO: argue const correctness? example set_car function. It changes the game_instance passed in..should be const or no?
+//TODO: final math described in readme.
