@@ -54,7 +54,7 @@ LetsMakeADeal::LetsMakeADeal(int const doors, int const open_doors, std::string 
 	game_.assign(doors, door_states::goat);
 }
 
-bool LetsMakeADeal::run_game()
+void LetsMakeADeal::run_game()
 {
 	set_car();
 	for (auto i = 0; i < open_doors_; ++i)
@@ -62,17 +62,18 @@ bool LetsMakeADeal::run_game()
 		open_random_door();
 	}
 	guess_door();
-	auto won = false;
 	if (strat_ == strategy::change)
 	{
 		guess_door();
 	}
 	if (game_[guess_] == door_states::car)
 	{
-		won = true;
+		result_ = result::won;
 	}
-
-	return won;
+	else
+	{
+		result_ = result::lost;
+	}
 }
 
 LetsMakeADeal::result LetsMakeADeal::get_result() const

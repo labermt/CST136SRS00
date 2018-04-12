@@ -28,6 +28,6 @@ private:
 
 public:
 	LetsMakeADeal(int const doors, int const open_doors, std::string const strat);
-	bool run_game();
+	void run_game();
 	result get_result() const;
 };
