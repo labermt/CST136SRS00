@@ -87,8 +87,8 @@ int main(int const argc, char* const argv[])
 			game.run_game();
 		}
 
-		auto wins{ 0.0 };
-		auto losses{ 0.0 };
+		auto wins{ 0 };
+		auto losses{ 0};
 
 		for (auto &game : game_list)
 		{
@@ -101,11 +101,11 @@ int main(int const argc, char* const argv[])
 				++losses;
 			}
 		}
-		auto const win_percent{ wins / games };
-		auto const loss_percent{ losses / games };
+		auto const win_percent{ (wins *1.0) / (games *1.0) };
+		auto const loss_percent{ (losses *1.0) / (games *1.0) };
 
 		std::cout << win_percent << std::endl;
-		assert(win_percent + loss_percent > .999999 && win_percent + loss_percent < 1.000001);
+		assert(.999999 < win_percent + loss_percent < 1.000001);
 	}
 	return 0;
 }

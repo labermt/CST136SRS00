@@ -22,7 +22,7 @@ private:
 
 
 	void open_random_door();
-	unsigned get_rand_door() const;
+	int get_rand_door() const;
 	void guess_door();
 
 public:

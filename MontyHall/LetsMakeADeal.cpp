@@ -16,7 +16,7 @@ void LetsMakeADeal::open_random_door()
 	game_[door] = door_states::opened;
 }
 
-unsigned LetsMakeADeal::get_rand_door() const
+int LetsMakeADeal::get_rand_door() const
 {
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
