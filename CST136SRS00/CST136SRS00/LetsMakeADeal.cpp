@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <cassert>
 #include "LetsMakeADeal.h"
 #include <random>
 
@@ -33,6 +34,17 @@ void LetsMakeADeal::playGame()
 
 	//randomly choose a door
 	int chosenDoor = doors[distr(generator)];
+
+	//assert probabilities are correct
+	double numCars = 0, numGoats = 0;
+	for (int i = 0; i < doors.size(); i++)
+	{
+		if (doors[i] == 1) numCars++;
+		else numGoats++;
+	}
+	double carsProbability = numCars / numDoors;
+	double goatProbability = numGoats / numDoors;
+	assert(carsProbability + goatProbability == 1.0);
 
 	//predisclose doors
 	int tempDoor;
