@@ -13,28 +13,34 @@ strategy_{ strategy }
 
 bool LetsMakeADeal::simulateGame() const
 {
+	// Set the car door & the initially selected door, plus create a vector of every door storing whether or not it is open
 	const auto carDoor{ getRandomInt(0, doors_) };
 	auto selDoor{ getRandomInt(0, doors_) };
-	std::vector<bool> openedDoors(doors_);
-	auto doorsOpen = 0;
-	while(doorsOpen < reveal_)
+	std::vector<bool> doors(doors_);
+	auto doorsOpened = 0;
+
+	// Continue to open doors until the amount asked for is reached
+	while(doorsOpened < reveal_)
 	{
 		const auto doorToOpen{ getRandomInt(0, doors_) };
-		if(doorToOpen != carDoor && doorToOpen != selDoor && !openedDoors[doorToOpen])
+		if(doorToOpen != carDoor && doorToOpen != selDoor && !doors[doorToOpen])
 		{
-			openedDoors[doorToOpen] = true;
-			doorsOpen++;
+			doors[doorToOpen] = true;
+			doorsOpened++;
 		}
 	}
+
+	// If the user wants to test the Switch strategy, find a random, unopened door other than the selected door
 	if(strategy_ == Strategy::kSwitch)
 	{
 		auto newSelDoor = selDoor;
-		while(newSelDoor == selDoor || openedDoors[newSelDoor])
+		while(newSelDoor == selDoor || doors[newSelDoor])
 		{
 			newSelDoor = getRandomInt(0, doors_);
 		}
 		selDoor = newSelDoor;
 	}
+
 	return selDoor == carDoor;
 }
 
