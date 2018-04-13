@@ -5,7 +5,7 @@
 #include <cassert>
 #include <complex>
 
-int main(int const argc, char* argv[])
+int main(int const argc, char* const argv[])
 {
 	auto doors = 3;
 	auto open_doors = 1;
@@ -28,6 +28,11 @@ int main(int const argc, char* argv[])
 			{
 				std::istringstream iss(argv[i + 1]);
 				iss >> doors;
+				if (doors < 3)
+				{
+					fault = true;
+					break;
+				}
 				break;
 			}
 			case 'o':
@@ -99,8 +104,7 @@ int main(int const argc, char* argv[])
 		auto const win_percent{ wins / games };
 		auto const loss_percent{ losses / games };
 
-		std::cout << "Out of " << games << " game(s) you won "
-			<< wins << " which is "<< win_percent*100 <<"%. or to meet spec"<<  << std::endl;
+		std::cout << win_percent << std::endl;
 		assert(win_percent + loss_percent > .999999 && win_percent + loss_percent < 1.000001);
 	}
 	return 0;

@@ -22,7 +22,6 @@ private:
 
 
 	void open_random_door();
-	void set_car();
 	unsigned get_rand_door() const;
 	void guess_door();
 

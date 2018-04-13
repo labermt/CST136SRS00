@@ -16,11 +16,6 @@ void LetsMakeADeal::open_random_door()
 	game_[door] = door_states::opened;
 }
 
-void LetsMakeADeal::set_car()
-{
-	game_[get_rand_door()] = door_states::car;
-}
-
 unsigned LetsMakeADeal::get_rand_door() const
 {
 	static std::random_device rd;
@@ -70,7 +65,7 @@ void LetsMakeADeal::display_help()
 
 void LetsMakeADeal::run_game()
 {
-	set_car();
+	game_[get_rand_door()] = door_states::car;
 	guess_door();
 	for (auto i = 0; i < open_doors_; ++i)
 	{
