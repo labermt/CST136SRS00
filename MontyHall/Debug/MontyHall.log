@@ -1,2 +1,5 @@
-﻿  main.cpp
+﻿  stdafx.cpp
+  LetsMakeADeal.cpp
+  main.cpp
+  Generating Code...
   MontyHall.vcxproj -> C:\Users\jen\Desktop\CST136\CST136SRS00\Debug\MontyHall.exe

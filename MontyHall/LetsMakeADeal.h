@@ -3,10 +3,11 @@
 class LetsMakeADeal
 {
 public:
+	int randomDoor() const;
 	LetsMakeADeal(size_t numOfDoors, size_t openDoors);
 	enum class behindTheDoor {goat, car};
 	behindTheDoor makeDeal(bool stay); 
-	int randomDoor() const;
+
 private: 
 	const size_t numOfDoors_{}; //start amount of doors
 	const size_t openDoors_{}; //how many doors to open or predisclose 

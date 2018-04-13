@@ -15,6 +15,7 @@ LetsMakeADeal::LetsMakeADeal(size_t numOfDoors, size_t openDoors) :
 	}
 	doors_[randomDoor()] = behindTheDoor::car;
 }
+
 int LetsMakeADeal::randomDoor() const
 {	
 	//taken from http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
@@ -23,8 +24,11 @@ int LetsMakeADeal::randomDoor() const
 	const std::uniform_int_distribution<size_t> dis(0, finalLength_ - 1);
 	return dis(gen);
 }
+
 ::LetsMakeADeal::behindTheDoor LetsMakeADeal::makeDeal(bool stay)
 {
 	auto result(behindTheDoor::goat); 
 	return result;
 }
+
+
