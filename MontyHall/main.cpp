@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
     newGame.setNumOfGameInstances(numOfGameInstances);
 
     int carLocation = newGame.randomNumber(numOfDoors - 1);
+    newGame.setCarLocation(carLocation);
 
     cout << "Location of car: " << carLocation << endl;
 
@@ -28,6 +29,7 @@ int main(int argc, char *argv[]) {
 
     newGame.createDoors(carLocation);
     newGame.printArray();
+    newGame.revealDoors();
     newGame.revealDoors();
 
 

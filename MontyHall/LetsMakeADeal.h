@@ -7,12 +7,14 @@
 
 #include <iostream>
 #include <random>
+#include <algorithm>
 
 class LetsMakeADeal {
 public:
     void setNumOfDoors(int numDoors);
     void setNumOfDoorsToReveal(int numDoorsToReveal);
     void setNumOfGameInstances(int numGameInstances);
+    void setCarLocation(int locationOfCar);
 
     int randomNumber(int max);
     void createDoors(int carLocation);

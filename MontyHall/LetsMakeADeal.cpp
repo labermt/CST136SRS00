@@ -3,6 +3,7 @@
 //
 
 #include "LetsMakeADeal.h"
+
 using namespace std;
 
 void LetsMakeADeal::setNumOfDoors(int numDoors) {
@@ -15,6 +16,10 @@ void LetsMakeADeal::setNumOfDoorsToReveal(int numDoorsToReveal) {
 
 void LetsMakeADeal::setNumOfGameInstances(int numGameInstances) {
     numOfGameInstances = numGameInstances;
+}
+
+void LetsMakeADeal::setCarLocation(int locationOfCar) {
+    carLocation = locationOfCar;
 }
 
 // http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
@@ -61,5 +66,40 @@ void LetsMakeADeal::printArray() {
 }
 
 void LetsMakeADeal::revealDoors() {
+    //Create an array with numbers from 0 to numOfDoors
+    int randomArray[numOfDoors];
+    //arrDoorsToReveal holds the locations of the doors that will be reveals from the doorArray
+    int arrDoorsToReveal[numOfDoorsToReveal];
+    for(int i = 0; i < numOfDoors; i++) {
+        randomArray[i] = i;
+    }
 
+    //Shuffle the array
+    //tried implementing with random_shuffle but this is removed in c++17
+    //https://www.quora.com/How-can-I-shuffle-the-numbers-in-c++
+    //http://www.cplusplus.com/reference/algorithm/shuffle/
+    random_device seed;
+    mt19937 rng(seed());
+
+    shuffle(&(randomArray[0]), &(randomArray[numOfDoors]), rng);
+
+    cout << endl << endl << "Random Array: " << endl;
+    for(int j = 0; j < numOfDoors; j++) {
+        cout << " " << randomArray[j];
+    }
+
+    //Take only the numbers from element 0 to numOfDoorsToReveal --- Make sure carLocation is not included
+    int l = 0;
+    for(int k = 0; k < numOfDoorsToReveal; k++) {
+        if(randomArray[k] == carLocation) {
+            k++;
+        }
+        arrDoorsToReveal[l] = randomArray[k];
+        l++;
+    }
+
+    cout << endl << endl << "DOORS TO REVEAL ARRAY" << endl;
+    for(int m = 0; m < numOfDoorsToReveal; m++) {
+        cout << arrDoorsToReveal[m] << " ";
+    }
 }
