@@ -11,7 +11,7 @@
 
 static void showUsage()
 {
-	std::cerr << std::endl << 
+	std::cerr << std::endl <<
 		"Incorrect Parameters!\n"
 		"\n"
 		"\t Usage:\n"
@@ -30,7 +30,7 @@ static void showUsage()
 		<< std::endl;
 }
 
-int main(const int argc, char* argv[] )
+int main(const int argc, char* argv[])
 {
 	// Default choices for input parameters
 	size_t doorParam{ 3 };
@@ -40,50 +40,46 @@ int main(const int argc, char* argv[] )
 	auto failedParse = false;
 
 	// Parse input parameters
-	for ( size_t i{ 1 }; i < argc; i++)
+	for (size_t i{ 1 }; i < argc; i += 2)
 	{
 		const auto parameter = std::string(argv[i]);
 
-		if ( parameter == "-d" || parameter == "--doors")
+		if (parameter == "-d" || parameter == "--doors")
 		{
-			i++;
-			std::istringstream iss(argv[i]);
-			
-			if ( !(iss >> doorParam) || iss.bad() )
-			{
-				failedParse = true;
-			}
-		}
-		else if ( parameter == "-o" || parameter == "--open")
-		{
-			i++;
-			std::istringstream iss(argv[i]);
-			
-			if ( !(iss >> openParam) || iss.bad() )
-			{
-				failedParse = true;
-			}
-		}
-		else if ( parameter == "-i" || parameter == "--instances")
-		{
-			i++;
-			std::istringstream iss(argv[i]);
-			
-			if ( !(iss >> instancesParam) || iss.bad() )
-			{
-				failedParse = true;
-			}
-		}
-		else if ( parameter == "-s" || parameter == "--strategy" )
-		{
-			i++;
-			const auto choice = std::string(argv[i]);
+			std::istringstream iss(argv[i + 1]);
 
-			if ( choice == "stay" )
+			if (!(iss >> doorParam) || iss.bad())
+			{
+				failedParse = true;
+			}
+		}
+		else if (parameter == "-o" || parameter == "--open")
+		{
+			std::istringstream iss(argv[i + 1]);
+
+			if (!(iss >> openParam) || iss.bad())
+			{
+				failedParse = true;
+			}
+		}
+		else if (parameter == "-i" || parameter == "--instances")
+		{
+			std::istringstream iss(argv[i + 1]);
+
+			if (!(iss >> instancesParam) || iss.bad())
+			{
+				failedParse = true;
+			}
+		}
+		else if (parameter == "-s" || parameter == "--strategy")
+		{
+			const auto choice = std::string(argv[i + 1]);
+
+			if (choice == "stay")
 			{
 				strategyParam = LetsMakeADeal::choice::stay;
 			}
-			else if ( choice == "switch" )
+			else if (choice == "switch")
 			{
 				strategyParam = LetsMakeADeal::choice::willswitch;
 			}
@@ -99,7 +95,7 @@ int main(const int argc, char* argv[] )
 	}
 
 	// Show help if input parameters are in error, or invalid doors / open doors
-	if ( failedParse || doorParam <= openParam + 1 )
+	if (failedParse || doorParam <= openParam + 1)
 	{
 		showUsage();
 		return 0;
@@ -112,11 +108,11 @@ int main(const int argc, char* argv[] )
 	auto goatTally{ 0 };
 
 	// Run the games
-	for ( auto i{ 0 }; i < instancesParam; i++)
+	for (auto i{ 0 }; i < instancesParam; i++)
 	{
 		games.push_back(LetsMakeADeal(doorParam, openParam, strategyParam));
 
-		if ( games[i].runGame() == LetsMakeADeal::prize::car)
+		if (games[i].runGame() == LetsMakeADeal::prize::car)
 		{
 			carTally++;
 		}
@@ -126,12 +122,15 @@ int main(const int argc, char* argv[] )
 		}
 	}
 
-	const auto probabilityCar = double(carTally) / double(carTally + goatTally);
-	const auto probabilityGoat = double(goatTally) / double(carTally + goatTally);
+	const auto probabilityCar = (1.0 * carTally) / instancesParam;
+	const auto probabilityGoat = (1.0 * goatTally) / instancesParam;
 
-	assert(98 <= probabilityCar + probabilityGoat <= 100);
+	assert(99 <= probabilityCar + probabilityGoat <= 100);
+
+	std::cout << probabilityCar;
 
 	// Output the results
+	/*
 	std::cout << "\n The probability of winning a car is "
 		<< std::setprecision(3) << probabilityCar * 100 << "%";
 	std::cout << " if there are "
@@ -141,7 +140,8 @@ int main(const int argc, char* argv[] )
 
 	std::cout << " This was calculated over "
 		<< instancesParam << " simulations of the game.\n";
+	*/
 
-    return 0;
+	return 0;
 }
 
