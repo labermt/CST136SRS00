@@ -1,25 +1,24 @@
 ﻿#ifndef LETSMAKEADEAL_H
 #define LETSMAKEADEAL_H
 
+enum class Strategy { kKeep = 0, kTrade = 1, kError };
+
 class LetsMakeADeal
 {
 private:
 
-	int doors_{ 3 };
-	int revealed_{ 1 };
-	int strat_;
-
-public:
-
-	enum strategy { keep = 0, trade = 1 };
+	const int doors_{ 3 };
+	const int revealed_{ 1 };
+	const Strategy strat_;
 
 public:
 	
-	LetsMakeADeal(const int doors, const int revealed, const int strat);
-	~LetsMakeADeal();
+	LetsMakeADeal(const int& doors, const int& revealed, const Strategy& strat);
 
-	void strat(int strat) const;
-	void probability();
+	bool simulateDeal() const;
+
+private:
+	int randomDoor(const int doors);
 };
 
 #endif
