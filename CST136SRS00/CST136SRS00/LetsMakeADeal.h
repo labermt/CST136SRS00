@@ -13,7 +13,7 @@ private:
 public:
 	LetsMakeADeal();
 	LetsMakeADeal(unsigned numDoors_, unsigned numDisclosedDoors_, bool stay_);
-	bool getResult();
+	bool getResult() const;
 	~LetsMakeADeal();
 };
 

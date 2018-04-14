@@ -4,17 +4,17 @@
 #include <random>
 
 LetsMakeADeal::LetsMakeADeal()
-	:numDoors{ 3 }, numDisclosedDoors{ 1 }, stay{ true }
+	:numDoors{ 3 }, numDisclosedDoors{ 1 }, stay{ true }, result{false}
 {
 
 }
 LetsMakeADeal::LetsMakeADeal(unsigned numDoors_, unsigned numDisclosedDoors_, bool stay_)
-	:numDoors{ numDoors_ }, numDisclosedDoors{ numDisclosedDoors_ }, stay{ stay_ }
+	:numDoors{ numDoors_ }, numDisclosedDoors{ numDisclosedDoors_ }, stay{ stay_ }, result{ false }
 {
 	playGame();
 }
 
-bool LetsMakeADeal::getResult()
+bool LetsMakeADeal::getResult() const
 {
 	return result;
 }
@@ -36,14 +36,14 @@ void LetsMakeADeal::playGame()
 	int chosenDoor = doors[distr(generator)];
 
 	//assert probabilities are correct
-	double numCars = 0, numGoats = 0;
+	int numCars = 0, numGoats = 0;
 	for (int i = 0; i < doors.size(); i++)
 	{
 		if (doors[i] == 1) numCars++;
 		else numGoats++;
 	}
-	double carsProbability = numCars / numDoors;
-	double goatProbability = numGoats / numDoors;
+	const double carsProbability = (numCars * 1.0) / numDoors;
+	const double goatProbability = (numGoats * 1.0) / numDoors;
 	assert(carsProbability + goatProbability == 1.0);
 
 	//predisclose doors
