@@ -8,7 +8,8 @@ LetsMakeADeal::LetsMakeADeal(const size_t numDoors, const size_t numDisclose, co
 	numDisclose_{ numDisclose },
 	selectDoor_{ randomGen(numDoors) },
 	carDoor_{ randomGen(numDoors) },
-	strategy_{ strategy }
+	strategy_{ strategy },
+	result_{}
 {
 	for (size_t i{ 0 }; i < numDoors; i++)
 	{
@@ -16,6 +17,13 @@ LetsMakeADeal::LetsMakeADeal(const size_t numDoors, const size_t numDisclose, co
 	}
 
 	doors_[carDoor_] = prize::car;
+
+	runGame();
+}
+
+LetsMakeADeal::prize LetsMakeADeal::getResult() const
+{
+	return result_;
 }
 
 void LetsMakeADeal::showUsage()
@@ -44,7 +52,7 @@ void LetsMakeADeal::showUsage()
 		<< std::endl;
 }
 
-LetsMakeADeal::prize LetsMakeADeal::runGame()
+void LetsMakeADeal::runGame()
 {
 	auto discloseTally{ 0 };
 	auto cantOpen{ 2 };
@@ -71,7 +79,7 @@ LetsMakeADeal::prize LetsMakeADeal::runGame()
 		}
 	}
 
-	auto result{ selectDoor_ };
+	result_ = doors_[selectDoor_];
 
 	// If the switch option is set, pick another unopened door
 	if (strategy_ == choice::change)
@@ -89,13 +97,11 @@ LetsMakeADeal::prize LetsMakeADeal::runGame()
 				&& i != selectDoor_
 				&& randomGen(numDoors_ - cantOpen) < 1)
 			{
-				result = i;
+				result_ = doors_[i];
 				break;
 			}
 		}
 	}
-
-	return doors_[result];
 }
 
 size_t LetsMakeADeal::randomGen(const size_t numDoors)

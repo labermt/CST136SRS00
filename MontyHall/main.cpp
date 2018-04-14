@@ -79,8 +79,8 @@ int main(const int argc, char* argv[])
 		|| doorParam < openParam + 2
 		|| instancesParam == 0
 		|| strategyParam == LetsMakeADeal::choice::unselected
-		|| doorParam < 0
-		|| openParam < 0)
+		|| doorParam < 3
+		|| openParam < 1)
 	{
 		LetsMakeADeal::showUsage();
 		return 0;
@@ -89,16 +89,20 @@ int main(const int argc, char* argv[])
 
 	// Variables for games / tallies
 	std::vector<LetsMakeADeal> games;
-	auto carTally{ 0 };
-	auto goatTally{ 0 };
 
-	// Run the games
-	// TODO: Check with mitch if this is okay or I need 2 seperate loops
+	// Add games to container
 	for (auto i{ 0 }; i < instancesParam; i++)
 	{
 		games.push_back(LetsMakeADeal(doorParam, openParam, strategyParam));
+	}
 
-		if (games[i].runGame() == LetsMakeADeal::prize::car)
+	auto carTally{ 0 };
+	auto goatTally{ 0 };
+
+	// Total probability 
+	for ( auto & game: games)
+	{
+		if (game.getResult() == LetsMakeADeal::prize::car)
 		{
 			carTally++;
 		}
@@ -111,7 +115,7 @@ int main(const int argc, char* argv[])
 	const auto probabilityCar = (1.0 * carTally) / instancesParam;
 	const auto probabilityGoat = (1.0 * goatTally) / instancesParam;
 
-	assert(99.99 <= probabilityCar + probabilityGoat <= 100.0);
+	assert(.99 <= probabilityCar + probabilityGoat && probabilityCar + probabilityGoat <= 1.0);
 
 	std::cout << probabilityCar;
 

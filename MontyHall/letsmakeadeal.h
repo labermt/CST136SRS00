@@ -14,13 +14,15 @@ private:
 	const size_t selectDoor_;
 	const size_t carDoor_;
 	const choice strategy_;
+	prize result_;
 	std::vector<prize> doors_{};
 
 public:
 	LetsMakeADeal(size_t, size_t, choice);
 
 public:
-	prize runGame();
+	prize getResult() const;
+	void runGame();
 	static void showUsage();
 
 private:
