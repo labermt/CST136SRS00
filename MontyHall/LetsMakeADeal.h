@@ -8,6 +8,9 @@
 #include <iostream>
 #include <random>
 #include <algorithm>
+#include <vector>
+
+using namespace std;
 
 class LetsMakeADeal {
 public:
@@ -15,11 +18,14 @@ public:
     void setNumOfDoorsToReveal(int numDoorsToReveal);
     void setNumOfGameInstances(int numGameInstances);
     void setCarLocation(int locationOfCar);
+    void setGuess();
 
+    void switchDoor();
     int randomNumber(int max);
-    void createDoors(int carLocation);
+    void createDoors();
     void printArray();
     void revealDoors();
+    void winningStatus();
 
 
 
@@ -28,7 +34,12 @@ private:
     int numOfDoorsToReveal;
     int numOfGameInstances;
     int carLocation;
-    int * doorArray;
+    int guess;
+    int wins;
+    int losses;
+    vector<int> doorVector;
+    vector<int>doorsToReveal;
+    vector<int>remainingDoors;
 };
 
 
