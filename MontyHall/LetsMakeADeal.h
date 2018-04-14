@@ -6,12 +6,12 @@ class LetsMakeADeal {
 
 private:
 	int number_of_doors_{};
-	int decide_switch_or_stay_{};		//1 for Switch; 2 for Stay
+	int decide_switch_or_stay_{};		// 1 for Switch; 2 for Stay
 	int number_of_games_{};
 	int number_doors_revealed_{};
 	int prize_door_{};
-	std::vector<bool> revealed_doors_{}; //store doors to revealed
-	std::vector<float> game_instances_{}; //store game scores
+	std::vector<bool> revealed_doors_{}; // store doors to revealed
+	std::vector<float> game_instances_{}; // store game scores
 
 	enum decide_switch_or_stay {
 		to_switch = 1,
