@@ -4,8 +4,8 @@
 class LetsMakeADeal
 {
 private:
-	int doors_{ 5 };
-	int disclosed_{ 2 };
+	int doors_{ 3 };
+	int disclosed_{ 1 };
 	bool swap_{ false };
 
 public:

@@ -12,8 +12,10 @@ LetsMakeADeal::LetsMakeADeal(const int doors, const int open, const bool plan) :
 bool LetsMakeADeal::play()
 {
 	std::uniform_int_distribution<int> distribution(1, doors_);
-	int winningdoor = distribution(generator);
-	int mydoor = distribution(generator);
+	auto winningdoor = distribution(generator);
+	auto mydoor = distribution(generator);
+
+	const auto pickedDoor{ 1 };
 
 	if (!swap_)
 	{
@@ -21,27 +23,27 @@ bool LetsMakeADeal::play()
 		{
 			return true;
 		}
-		else if (winningdoor != mydoor)
+		else
 		{
 			return false;
 		}
 	}
-	else if (swap_)
+	else
 	{
 		if (winningdoor == mydoor)
 		{
 			return false;
 		}
-		else if (winningdoor != mydoor)
+		else
 		{
-			std::uniform_int_distribution<int> newchance(1, doors_ - disclosed_);
+			std::uniform_int_distribution<int> newchance(1, doors_ - (disclosed_ + pickedDoor));
 			winningdoor = newchance(generator);
 			mydoor = newchance(generator);
 			if (winningdoor == mydoor)
 			{
 				return true;
 			}
-			else if (winningdoor != mydoor)
+			else
 			{
 				return false;
 			}
