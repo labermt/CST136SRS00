@@ -8,17 +8,19 @@ class LetsMakeADeal
 private:
 
 	const int doors_{ 3 };
-	const int revealed_{ 1 };
+	const int open_{ 1 };
 	const Strategy strat_;
 
 public:
 	
-	LetsMakeADeal(const int& doors, const int& revealed, const Strategy& strat);
+	LetsMakeADeal(const int& doors, const int& open, const Strategy& strat);
 
 	bool simulateDeal() const;
 
 private:
-	int randomDoor(const int doors);
+
+	int randomDoor(const int doors) const;
+
 };
 
 #endif
