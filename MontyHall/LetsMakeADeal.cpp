@@ -90,7 +90,8 @@ void LetsMakeADeal::revealDoors() {
 
     //Take only the numbers from element 0 to numOfDoorsToReveal --- Make sure carLocation is not included
     int l = 0;
-    for(int k = 0; k < numOfDoorsToReveal; k++) {
+    //l < numOfDoorsReveal because if k < numOfDoorsToReveal it can potentially reach 6 and exit the loop earlier than anticipated
+    for(int k = 0; l < numOfDoorsToReveal; k++) {
         if(randomArray[k] == carLocation) {
             k++;
         }

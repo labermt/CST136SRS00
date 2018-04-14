@@ -30,9 +30,6 @@ int main(int argc, char *argv[]) {
     newGame.createDoors(carLocation);
     newGame.printArray();
     newGame.revealDoors();
-    newGame.revealDoors();
-
-
     return 0;
 }
 
