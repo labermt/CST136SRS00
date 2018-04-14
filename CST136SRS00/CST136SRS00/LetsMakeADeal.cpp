@@ -12,6 +12,4 @@ LetsMakeADeal::LetsMakeADeal()
 LetsMakeADeal::~LetsMakeADeal()
 {
 
-
-
 }

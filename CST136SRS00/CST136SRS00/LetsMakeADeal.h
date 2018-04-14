@@ -14,9 +14,8 @@ public:
 	{
 	}
 
-private:
-	int totalDoors;
-	int openDoors;
+	const int totalDoors{3};
+	const int openDoors{1};
 	bool switchStrategy;
 	float winProbability;
 };
