@@ -3,15 +3,16 @@
 #include <random>
 
 
-LetsMakeADeal::LetsMakeADeal(size_t numOfDoors, size_t openDoors) :
+LetsMakeADeal::LetsMakeADeal(size_t numOfDoors, size_t openDoors, const Strategy strategy) :
 	numOfDoors_{ numOfDoors },
 	openDoors_{ openDoors },
 	finalLength_{ numOfDoors - openDoors },
-	chosenDoor_{}
+	chosenDoor_{randomDoor()},
+	strategy_ { strategy } 
 {
 	for (size_t i{}; i < finalLength_;i++)
 	{
-		doors_[i] = behindTheDoor::goat;//this puts a goat in each door
+		doors_[i] = behindTheDoor::goat;// this puts a goat in each door
 	}
 	doors_[randomDoor()] = behindTheDoor::car;
 }
@@ -25,9 +26,10 @@ int LetsMakeADeal::randomDoor() const
 	return dis(gen);
 }
 
-::LetsMakeADeal::behindTheDoor LetsMakeADeal::makeDeal(bool stay)
+LetsMakeADeal::behindTheDoor LetsMakeADeal::playGame()
 {
-	auto result(behindTheDoor::goat); 
+
+	auto result(behindTheDoor::goat);
 	return result;
 }
 
