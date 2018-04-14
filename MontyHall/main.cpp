@@ -1,5 +1,4 @@
 // main.cpp : Defines the entry point for the console application.
-//TODO: change to "S algorithm" for selecting doors to open.
 //
 
 #include "stdafx.h"
@@ -24,7 +23,12 @@ static void showUsage()
 		"\n"
 		"\t MontyHall.exe --doors 3 --open 1 --instances 100 --strategy stay\n"
 		"\t MontyHall.exe -d 5 -o 3 -s switch --instances 1000\n"
-		"\t MontyHall.exe -d 30 --instances 500\n"
+		"\t MontyHall.exe -d 30 --open 2\n"
+		"\n"
+		"\t Important:\n"
+		"\n"
+		"\t Instances and strategy must be entered as parameters or this help will display.\n"
+		"\t The the following must be true: doors > (open + 2).\n"
 		"\n"
 		"\t See README.md for details.\n"
 		<< std::endl;
@@ -35,8 +39,8 @@ int main(const int argc, char* argv[])
 	// Default choices for input parameters
 	size_t doorParam{ 3 };
 	size_t openParam{ 1 };
-	size_t instancesParam{ 100 };
-	auto strategyParam{ LetsMakeADeal::choice::stay };
+	size_t instancesParam{ 0 };
+	auto strategyParam{ LetsMakeADeal::choice::unselected };
 	auto failedParse = false;
 
 	// Parse input parameters
@@ -81,7 +85,7 @@ int main(const int argc, char* argv[])
 			}
 			else if (choice == "switch")
 			{
-				strategyParam = LetsMakeADeal::choice::willswitch;
+				strategyParam = LetsMakeADeal::choice::change;
 			}
 			else
 			{
@@ -95,7 +99,10 @@ int main(const int argc, char* argv[])
 	}
 
 	// Show help if input parameters are in error, or invalid doors / open doors
-	if (failedParse || doorParam <= openParam + 1)
+	// or no entry for instancesParam or strategyParam
+	if (failedParse || doorParam <= openParam + 1 ||
+		instancesParam == 0 || strategyParam == LetsMakeADeal::choice::unselected ||
+		doorParam < 0 || openParam < 0)
 	{
 		showUsage();
 		return 0;
@@ -108,6 +115,7 @@ int main(const int argc, char* argv[])
 	auto goatTally{ 0 };
 
 	// Run the games
+	// TODO: Check with mitch if this is okay or I need 2 seperate loops
 	for (auto i{ 0 }; i < instancesParam; i++)
 	{
 		games.push_back(LetsMakeADeal(doorParam, openParam, strategyParam));

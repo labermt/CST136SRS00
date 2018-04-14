@@ -5,7 +5,7 @@
 class LetsMakeADeal
 {
 public:
-	enum class choice { stay, willswitch };
+	enum class choice { stay, change, unselected };
 	enum class prize { goat, open, car };
 
 private:
