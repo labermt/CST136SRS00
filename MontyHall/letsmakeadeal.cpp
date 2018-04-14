@@ -5,8 +5,8 @@
 LetsMakeADeal::LetsMakeADeal(const size_t numDoors, const size_t numDisclose, const choice strategy) :
 	numDoors_{ numDoors },
 	numDisclose_{ numDisclose },
-	selectDoor_{ randomGen(numDoors - 1) },
-	carDoor_{ randomGen(numDoors - 1) },
+	selectDoor_{ randomGen(numDoors) },
+	carDoor_{ randomGen(numDoors) },
 	strategy_{ strategy }
 {
 	for (size_t i{ 0 }; i < numDoors; i++)
@@ -19,31 +19,28 @@ LetsMakeADeal::LetsMakeADeal(const size_t numDoors, const size_t numDisclose, co
 
 LetsMakeADeal::prize LetsMakeADeal::runGame()
 {
-	auto discloseTally{ numDisclose_ };
+	auto discloseTally{ 0 };
+	auto cantOpen{ 2 };
+
+	if (selectDoor_ == carDoor_)
+	{
+		cantOpen = 1;
+	}
 
 	// Open numDisclose_ number of doors
 	for (size_t i{ 0 }; i < numDoors_; i++)
 	{
-		auto cantOpen{2};
-
-		if (selectDoor_ == carDoor_)
-		{
-			cantOpen = 1;
-		}
-
-		// for each door, decide to open based on p choose k
 		if (doors_[i] != prize::car
 			&& i != selectDoor_
-			&& randomGen(numDoors_ - i - cantOpen) <= discloseTally)
+			&& randomGen(numDoors_ - cantOpen - discloseTally) < numDisclose_)
 		{
 			doors_[i] = prize::open;
-			discloseTally--;
-
-			//Once all doors are selected, exit for loop
-			if (discloseTally == 0)
-			{
-				break;
-			}
+			discloseTally++;
+			numDisclose_--;
+		}
+		if (numDisclose_ == 0)
+		{
+			break;
 		}
 	}
 
@@ -52,11 +49,18 @@ LetsMakeADeal::prize LetsMakeADeal::runGame()
 	// If the switch option is set, pick another unopened door
 	if (strategy_ == choice::change)
 	{
+		if (carDoor_ != selectDoor_)
+		{
+			cantOpen = 1;
+		}
+
+		cantOpen += discloseTally;
+
 		for (size_t i{ 0 }; i < numDoors_; i++)
 		{
 			if (doors_[i] != prize::open
 				&& i != selectDoor_
-				&& randomGen(numDoors_ - numDisclose_ - 1) < 1)
+				&& randomGen(numDoors_ - cantOpen) < 1)
 			{
 				result = i;
 				break;
@@ -72,7 +76,7 @@ size_t LetsMakeADeal::randomGen(const size_t numDoors)
 	// Create random number generator and generate a number between 0 and numDoors - 1
 	static std::random_device rd;  //Will be used to obtain a seed for the random number engine
 	static std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
-	const std::uniform_int_distribution<size_t> dis(0, numDoors);
+	const std::uniform_int_distribution<size_t> dis(0, numDoors - 1);
 
 	return dis(gen);
 }

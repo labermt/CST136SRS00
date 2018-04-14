@@ -100,9 +100,12 @@ int main(const int argc, char* argv[])
 
 	// Show help if input parameters are in error, or invalid doors / open doors
 	// or no entry for instancesParam or strategyParam
-	if (failedParse || doorParam <= openParam + 1 ||
-		instancesParam == 0 || strategyParam == LetsMakeADeal::choice::unselected ||
-		doorParam < 0 || openParam < 0)
+	if (failedParse
+		|| doorParam < openParam + 2
+		|| instancesParam == 0
+		|| strategyParam == LetsMakeADeal::choice::unselected
+		|| doorParam < 0
+		|| openParam < 0)
 	{
 		showUsage();
 		return 0;

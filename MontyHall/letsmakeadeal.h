@@ -10,7 +10,7 @@ public:
 
 private:
 	const size_t numDoors_;
-	const size_t numDisclose_;
+	size_t numDisclose_;
 	const size_t selectDoor_;
 	const size_t carDoor_;
 	const choice strategy_;
