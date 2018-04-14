@@ -40,7 +40,7 @@ int LetsMakeADeal::randomNumber(int max) {
 // car represented with a 1 and goat represented with a 0
 void LetsMakeADeal::createDoors() {
     //doorArray = new int[numOfDoors];
-    cout << "Number of doors: " << numOfDoors << endl;
+    //cout << "Number of doors: " << numOfDoors << endl;
     for(int i = 0; i < numOfDoors; i++) {
         if(i == carLocation) {
             //the car is represented with a 1
@@ -75,10 +75,12 @@ void LetsMakeADeal::revealDoors() {
 
     shuffle(randomNumbersVector.begin(), randomNumbersVector.end(), rng);
 
+    /*
     cout << endl << endl << "Random VECTOR: " << endl;
     for(int j = 0; j < numOfDoors ; j++) {
         cout << " " << randomNumbersVector[j] << " ";
     }
+     */
 
     //take only the first 0 to numOfDoorsToReveal
     for(int k = 0; k < numOfDoorsToReveal; k++) {
@@ -96,6 +98,7 @@ void LetsMakeADeal::revealDoors() {
         remainingDoors.push_back(randomNumbersVector[m]);
     }
 
+    /*
     cout << endl << endl << "Remaining Doors: " << endl;
     for(int a = 0; a < numOfDoors - numOfDoorsToReveal; a++) {
         cout << remainingDoors[a] << " ";
@@ -105,14 +108,15 @@ void LetsMakeADeal::revealDoors() {
     for(int l = 0; l < numOfDoorsToReveal; l++) {
         cout << doorsToReveal[l] << " ";
     }
+     */
 
 }
 
 void LetsMakeADeal::switchDoor() {
-    cout << endl << endl << "Remaining Doors: " << endl;
+   /* cout << endl << endl << "Remaining Doors: " << endl;
     for(int a = 0; a < numOfDoors - numOfDoorsToReveal; a++) {
         cout << remainingDoors[a] << " ";
-    }
+    }*/
     //Pick a random number within the unrevealed doors vector
     int randNumIndex = randomNumber(numOfDoors - numOfDoorsToReveal - 1);
     int newGuess = remainingDoors[randNumIndex];
@@ -128,13 +132,14 @@ void LetsMakeADeal::switchDoor() {
     cout << "Your new guess is: " << guess << endl;
 }
 
-void LetsMakeADeal::winningStatus() {
-    cout << endl << endl << endl;
+//Return 0 if you lost, 1 if you won
+int LetsMakeADeal::winningStatus() {
+    cout << endl;
     if(guess == carLocation) {
         cout << "You won!" << endl;
-        wins++;
+        return 1;
     } else {
         cout << "You lost" << endl;
-        losses++;
+        return 0;
     }
 }

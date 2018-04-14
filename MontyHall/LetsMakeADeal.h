@@ -25,7 +25,7 @@ public:
     void createDoors();
     void printArray();
     void revealDoors();
-    void winningStatus();
+    int winningStatus();
 
 
 
@@ -35,8 +35,7 @@ private:
     int numOfGameInstances;
     int carLocation;
     int guess;
-    int wins;
-    int losses;
+
     vector<int> doorVector;
     vector<int>doorsToReveal;
     vector<int>remainingDoors;
