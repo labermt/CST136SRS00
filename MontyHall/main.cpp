@@ -8,31 +8,6 @@
 #include <iomanip>
 #include <cassert>
 
-static void showUsage()
-{
-	std::cerr << std::endl <<
-		"Incorrect Parameters!\n"
-		"\n"
-		"\t Usage:\n"
-		"\t -d,--doors			Number of doors (default = 3)\n"
-		"\t -o,--open			Number of doors to open (default = 1)\n"
-		"\t -i,--instances			Number of game instances to run (default = 1)\n"
-		"\t -s,--strategy			Selected strategy (options: stay, switch; default = stay)\n"
-		"\n"
-		"\t Example(s):\n"
-		"\n"
-		"\t MontyHall.exe --doors 3 --open 1 --instances 100 --strategy stay\n"
-		"\t MontyHall.exe -d 5 -o 3 -s switch --instances 1000\n"
-		"\t MontyHall.exe -d 30 --open 2\n"
-		"\n"
-		"\t Important:\n"
-		"\n"
-		"\t Instances and strategy must be entered as parameters or this help will display.\n"
-		"\t The the following must be true: doors > (open + 2).\n"
-		"\n"
-		"\t See README.md for details.\n"
-		<< std::endl;
-}
 
 int main(const int argc, char* argv[])
 {
@@ -107,7 +82,7 @@ int main(const int argc, char* argv[])
 		|| doorParam < 0
 		|| openParam < 0)
 	{
-		showUsage();
+		LetsMakeADeal::showUsage();
 		return 0;
 	}
 
@@ -136,23 +111,9 @@ int main(const int argc, char* argv[])
 	const auto probabilityCar = (1.0 * carTally) / instancesParam;
 	const auto probabilityGoat = (1.0 * goatTally) / instancesParam;
 
-	assert(99 <= probabilityCar + probabilityGoat <= 100);
+	assert(99.99 <= probabilityCar + probabilityGoat <= 100.0);
 
 	std::cout << probabilityCar;
 
-	// Output the results
-	/*
-	std::cout << "\n The probability of winning a car is "
-		<< std::setprecision(3) << probabilityCar * 100 << "%";
-	std::cout << " if there are "
-		<< doorParam << " doors, \n of which "
-		<< openParam << " doors are(is) opened and the contenstant chose to "
-		<< strategyParam << ".\n\n";
-
-	std::cout << " This was calculated over "
-		<< instancesParam << " simulations of the game.\n";
-	*/
-
 	return 0;
 }
-
