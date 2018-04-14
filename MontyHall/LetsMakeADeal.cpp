@@ -7,13 +7,28 @@
 
 void LetsMakeADeal::open_random_door()
 {
-	auto door{ get_rand_door() };
-	while (game_[door] != door_states::goat || door == guess_)
-	{
-		door = get_rand_door();
-	}
+	auto const numer = open_doors_ * 1.0;
+	auto const denom = doors_ * 1.0;
+	auto door_index{ 0 };
+	auto opened_doors{ 0 };
 
-	game_[door] = door_states::opened;
+	for (auto &door : game_)
+	{
+		if (door == door_states::goat && door_index != guess_)
+		{
+			if ((numer - opened_doors) / (denom - door_index) == 0)
+			{
+				break;
+			}
+			auto const final_num =  (numer - opened_doors) / (denom - opened_doors);
+			if (get_rand_door() - door_index <= final_num)
+			{
+				door = door_states::opened;
+				++opened_doors;
+			}
+		}
+		++door_index;
+	}
 }
 
 int LetsMakeADeal::get_rand_door() const
@@ -28,12 +43,29 @@ int LetsMakeADeal::get_rand_door() const
 
 void LetsMakeADeal::guess_door()
 {
-	auto guess = get_rand_door();
-	while (game_[guess] == door_states::opened || guess_ == guess)
+	if (guess_ >= 0)
 	{
-		guess = get_rand_door();
+		auto door_index{0};
+		auto const check = ( open_doors_ / doors_);
+		for(auto &door : game_)
+		{
+			if (door != door_states::opened && (get_rand_door() / doors_) <= check)
+			{
+				guess_ = door_index;
+				break;
+			}
+			++door_index;
+		}
 	}
-	guess_ = guess;
+	else
+	{
+		auto guess = get_rand_door();
+		while (game_[guess] == door_states::opened || guess_ == guess)
+		{
+			guess = get_rand_door();
+		}
+		guess_ = guess;
+	}
 }
 
 LetsMakeADeal::LetsMakeADeal(int const doors, int const open_doors, std::string const strat) :
