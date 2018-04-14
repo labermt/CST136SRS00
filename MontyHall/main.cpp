@@ -11,6 +11,13 @@ int toInt(char * character);
 int main(int argc, char *argv[]) {
     vector<LetsMakeADeal> games;
 
+    //Command Line Help
+    if(argc < 5) {
+        cout << "Please include number of doors, number of doors to disclose, number of game instances, ";
+        cout << "and whether you would like to switch or stay";
+        return 0;
+    }
+
     int numOfDoors = toInt(argv[1]);
     int numOfDoorsToReveal = toInt(argv[2]);
     int numOfGameInstances = toInt(argv[3]);
@@ -20,25 +27,17 @@ int main(int argc, char *argv[]) {
     float probabilityCar = 0.0;
     float probabilityGoat = 0.0;
 
-    cout << "Number of doors: " << numOfDoors << endl;
-    cout << "Number of doors to reveal: " << numOfDoorsToReveal << endl;
-    cout << "Number of Game instances: " << numOfGameInstances << endl;
 
     //Run the game numOfGameInstances times
     for(int i = numOfGameInstances; i > 0; i--) {
         LetsMakeADeal newGame;
         newGame.setNumOfDoors(numOfDoors);
         newGame.setNumOfDoorsToReveal(numOfDoorsToReveal);
-        newGame.setNumOfGameInstances(numOfGameInstances);
         newGame.setGuess();
 
         int carLocation = newGame.randomNumber(numOfDoors - 1);
         newGame.setCarLocation(carLocation);
-
-        cout << "Location of car: " << carLocation << endl;
-
         newGame.createDoors();
-        newGame.printArray();
         newGame.revealDoors();
 
         //If the user wants to switch doors, switch
@@ -64,9 +63,9 @@ int main(int argc, char *argv[]) {
     //Find probability of losing and obtaining a goat
     probabilityGoat = (float)losses / (float)numOfGameInstances;
 
-    cout << endl << "probability of winning: " << probabilityCar;
-
     assert((probabilityCar + probabilityGoat) == 1);
+
+    cout << probabilityCar;
 
     return 0;
 }

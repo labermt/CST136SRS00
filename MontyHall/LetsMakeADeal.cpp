@@ -14,17 +14,12 @@ void LetsMakeADeal::setNumOfDoorsToReveal(int numDoorsToReveal) {
     numOfDoorsToReveal = numDoorsToReveal;
 }
 
-void LetsMakeADeal::setNumOfGameInstances(int numGameInstances) {
-    numOfGameInstances = numGameInstances;
-}
-
 void LetsMakeADeal::setCarLocation(int locationOfCar) {
     carLocation = locationOfCar;
 }
 
 void LetsMakeADeal::setGuess() {
     guess = randomNumber(numOfDoors);
-    cout << endl << "GUESS: " << guess;
 }
 
 // http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
@@ -39,8 +34,6 @@ int LetsMakeADeal::randomNumber(int max) {
 // createDoors creates an array of doors and behind each door is a goat or a car
 // car represented with a 1 and goat represented with a 0
 void LetsMakeADeal::createDoors() {
-    //doorArray = new int[numOfDoors];
-    //cout << "Number of doors: " << numOfDoors << endl;
     for(int i = 0; i < numOfDoors; i++) {
         if(i == carLocation) {
             //the car is represented with a 1
@@ -72,15 +65,7 @@ void LetsMakeADeal::revealDoors() {
     //http://www.cplusplus.com/reference/algorithm/shuffle/
     random_device seed;
     mt19937 rng(seed());
-
     shuffle(randomNumbersVector.begin(), randomNumbersVector.end(), rng);
-
-    /*
-    cout << endl << endl << "Random VECTOR: " << endl;
-    for(int j = 0; j < numOfDoors ; j++) {
-        cout << " " << randomNumbersVector[j] << " ";
-    }
-     */
 
     //take only the first 0 to numOfDoorsToReveal
     for(int k = 0; k < numOfDoorsToReveal; k++) {
@@ -98,25 +83,9 @@ void LetsMakeADeal::revealDoors() {
         remainingDoors.push_back(randomNumbersVector[m]);
     }
 
-    /*
-    cout << endl << endl << "Remaining Doors: " << endl;
-    for(int a = 0; a < numOfDoors - numOfDoorsToReveal; a++) {
-        cout << remainingDoors[a] << " ";
-    }
-
-    cout << endl << endl << "DOORS TO REVEAL: " << endl;
-    for(int l = 0; l < numOfDoorsToReveal; l++) {
-        cout << doorsToReveal[l] << " ";
-    }
-     */
-
 }
 
 void LetsMakeADeal::switchDoor() {
-   /* cout << endl << endl << "Remaining Doors: " << endl;
-    for(int a = 0; a < numOfDoors - numOfDoorsToReveal; a++) {
-        cout << remainingDoors[a] << " ";
-    }*/
     //Pick a random number within the unrevealed doors vector
     int randNumIndex = randomNumber(numOfDoors - numOfDoorsToReveal - 1);
     int newGuess = remainingDoors[randNumIndex];
@@ -124,22 +93,15 @@ void LetsMakeADeal::switchDoor() {
         randNumIndex = randomNumber(numOfDoors - numOfDoorsToReveal - 1);
         newGuess = remainingDoors[randNumIndex];
     }
-
-    cout << endl << "Your old guess was: " << guess << endl;
-    cout << "Index: " << randNumIndex;
-    cout << "Your new guess is: " << newGuess << endl;
     guess = newGuess;
-    cout << "Your new guess is: " << guess << endl;
+
 }
 
 //Return 0 if you lost, 1 if you won
 int LetsMakeADeal::winningStatus() {
-    cout << endl;
     if(guess == carLocation) {
-        cout << "You won!" << endl;
         return 1;
     } else {
-        cout << "You lost" << endl;
         return 0;
     }
 }

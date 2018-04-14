@@ -16,7 +16,6 @@ class LetsMakeADeal {
 public:
     void setNumOfDoors(int numDoors);
     void setNumOfDoorsToReveal(int numDoorsToReveal);
-    void setNumOfGameInstances(int numGameInstances);
     void setCarLocation(int locationOfCar);
     void setGuess();
 
@@ -32,7 +31,6 @@ public:
 private:
     int numOfDoors;
     int numOfDoorsToReveal;
-    int numOfGameInstances;
     int carLocation;
     int guess;
 
