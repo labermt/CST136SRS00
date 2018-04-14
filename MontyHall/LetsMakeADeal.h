@@ -1,7 +1,6 @@
 #pragma once
 #include <vector>
 
-
 class LetsMakeADeal {
 
 private:
@@ -19,9 +18,6 @@ private:
 	};
 
 public:
-	LetsMakeADeal();
-
-	~LetsMakeADeal();
 
 	LetsMakeADeal(const int switch_or_stay, const int num_games, const int num_doors, const int num_doors_revealed);
 

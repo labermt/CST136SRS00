@@ -6,17 +6,6 @@
 #include <cassert>
 
 
-// ReSharper disable once CppPossiblyUninitializedMember
-LetsMakeADeal::LetsMakeADeal()
-{
-}
-
-
-LetsMakeADeal::~LetsMakeADeal()
-{
-}
-
-
 LetsMakeADeal::LetsMakeADeal(const int switch_or_stay, const int num_games, const int num_doors, const int num_doors_revealed)
 	:number_of_doors_(num_doors), decide_switch_or_stay_(switch_or_stay), number_of_games_(num_games), number_doors_revealed_(num_doors_revealed)
 {
@@ -89,7 +78,6 @@ void LetsMakeADeal::output_probability() {
 	// verify floats
 	assert((abs(verify_probability) - 1.0) < 0.0001);
 
-	// add probability of total wins and total losses, should equal to 1 +- .01
 	std::cout << win_probability << std::endl;
 }
 
