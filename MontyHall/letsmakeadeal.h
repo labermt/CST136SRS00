@@ -9,11 +9,12 @@ public:
 	enum class prize { goat, open, car };
 
 private:
-	const size_t numDoors_;
+	size_t const numDoors_;
 	size_t numDisclose_;
-	const size_t selectDoor_;
-	const size_t carDoor_;
-	const choice strategy_;
+	size_t const selectDoor_;
+	size_t const carDoor_;
+	choice const strategy_;
+
 	prize result_;
 	std::vector<prize> doors_{};
 
@@ -23,7 +24,7 @@ public:
 public:
 	prize getResult() const;
 	void runGame();
-	static void showUsage();
+	void static showUsage();
 	int checkDoors(choice);
 
 private:

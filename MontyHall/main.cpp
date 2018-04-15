@@ -101,7 +101,7 @@ int main(const int argc, char* argv[])
 	auto goatTally{ 0 };
 
 	// Total probability 
-	for ( auto & game: games)
+	for (auto & game : games)
 	{
 		if (game.getResult() == LetsMakeADeal::prize::car)
 		{

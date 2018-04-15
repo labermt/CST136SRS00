@@ -3,7 +3,7 @@
 #include <random>
 #include <iostream>
 
-LetsMakeADeal::LetsMakeADeal(const size_t numDoors, const size_t numDisclose, const choice strategy) :
+LetsMakeADeal::LetsMakeADeal(size_t const numDoors, size_t const numDisclose, choice const strategy) :
 	numDoors_{ numDoors },
 	numDisclose_{ numDisclose },
 	selectDoor_{ randomGen(numDoors) },
@@ -58,16 +58,16 @@ int LetsMakeADeal::checkDoors(choice strategy)
 
 	for (auto i{ 0 }; i < numDoors_; i++)
 	{
-		if(strategy == choice::stay)
+		if (strategy == choice::stay)
 		{
-			if(doors_[i] != prize::goat || i == selectDoor_)
+			if (doors_[i] != prize::goat || i == selectDoor_)
 			{
 				tally++;
 			}
 		}
-		if(strategy == choice::change )
+		if (strategy == choice::change)
 		{
-			if(doors_[i] == prize::open || i == selectDoor_)
+			if (doors_[i] == prize::open || i == selectDoor_)
 			{
 				tally++;
 			}
@@ -79,7 +79,6 @@ int LetsMakeADeal::checkDoors(choice strategy)
 void LetsMakeADeal::runGame()
 {
 	auto cantOpen{ checkDoors(choice::stay) };
-	auto testflag = false;
 
 	// Open numDisclose_ number of doors
 	for (size_t i{ 0 }; i < numDoors_; i++)
@@ -93,16 +92,11 @@ void LetsMakeADeal::runGame()
 
 				if (numDisclose_ == 0)
 				{
-					testflag = true;
 					break;
 				}
 			}
-		cantOpen++;
+			cantOpen++;
 		}
-	}
-	if (!testflag)
-	{
-		std::cout << "Whoops!";
 	}
 
 	result_ = doors_[selectDoor_];
@@ -110,19 +104,15 @@ void LetsMakeADeal::runGame()
 	// If the switch option is set, pick another unopened door
 	if (strategy_ == choice::change)
 	{
-		testflag = false;
-
 		cantOpen = checkDoors(choice::change);
 
 		for (size_t i{ 0 }; i < numDoors_; i++)
 		{
-			if (doors_[i] != prize::open
-				&& i != selectDoor_)
+			if (doors_[i] != prize::open && i != selectDoor_)
 			{
 				if (randomGen(numDoors_ - cantOpen) < 1)
 				{
 					result_ = doors_[i];
-					testflag = true;
 					break;
 				}
 				cantOpen++;
