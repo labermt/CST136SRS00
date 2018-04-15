@@ -11,6 +11,7 @@
 
 int main(const int argc, char* argv[])
 {
+
 	// Default choices for input parameters
 	size_t doorParam{ 3 };
 	size_t openParam{ 1 };

@@ -52,31 +52,57 @@ void LetsMakeADeal::showUsage()
 		<< std::endl;
 }
 
+int LetsMakeADeal::checkDoors(choice strategy)
+{
+	auto tally{ 0 };
+
+	for (auto i{ 0 }; i < numDoors_; i++)
+	{
+		if(strategy == choice::stay)
+		{
+			if(doors_[i] != prize::goat || i == selectDoor_)
+			{
+				tally++;
+			}
+		}
+		if(strategy == choice::change )
+		{
+			if(doors_[i] == prize::open || i == selectDoor_)
+			{
+				tally++;
+			}
+		}
+	}
+	return tally;
+}
+
 void LetsMakeADeal::runGame()
 {
-	auto discloseTally{ 0 };
-	auto cantOpen{ 2 };
-
-	if (selectDoor_ == carDoor_)
-	{
-		cantOpen = 1;
-	}
+	auto cantOpen{ checkDoors(choice::stay) };
+	auto testflag = false;
 
 	// Open numDisclose_ number of doors
 	for (size_t i{ 0 }; i < numDoors_; i++)
 	{
-		if (doors_[i] != prize::car
-			&& i != selectDoor_
-			&& randomGen(numDoors_ - cantOpen - discloseTally) < numDisclose_)
+		if (doors_[i] != prize::car && i != selectDoor_)
 		{
-			doors_[i] = prize::open;
-			discloseTally++;
-			numDisclose_--;
+			if (randomGen(numDoors_ - cantOpen) < numDisclose_)
+			{
+				doors_[i] = prize::open;
+				numDisclose_--;
+
+				if (numDisclose_ == 0)
+				{
+					testflag = true;
+					break;
+				}
+			}
+		cantOpen++;
 		}
-		if (numDisclose_ == 0)
-		{
-			break;
-		}
+	}
+	if (!testflag)
+	{
+		std::cout << "Whoops!";
 	}
 
 	result_ = doors_[selectDoor_];
@@ -84,21 +110,22 @@ void LetsMakeADeal::runGame()
 	// If the switch option is set, pick another unopened door
 	if (strategy_ == choice::change)
 	{
-		if (carDoor_ != selectDoor_)
-		{
-			cantOpen = 1;
-		}
+		testflag = false;
 
-		cantOpen += discloseTally;
+		cantOpen = checkDoors(choice::change);
 
 		for (size_t i{ 0 }; i < numDoors_; i++)
 		{
 			if (doors_[i] != prize::open
-				&& i != selectDoor_
-				&& randomGen(numDoors_ - cantOpen) < 1)
+				&& i != selectDoor_)
 			{
-				result_ = doors_[i];
-				break;
+				if (randomGen(numDoors_ - cantOpen) < 1)
+				{
+					result_ = doors_[i];
+					testflag = true;
+					break;
+				}
+				cantOpen++;
 			}
 		}
 	}

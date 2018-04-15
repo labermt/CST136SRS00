@@ -24,6 +24,7 @@ public:
 	prize getResult() const;
 	void runGame();
 	static void showUsage();
+	int checkDoors(choice);
 
 private:
 	static size_t randomGen(size_t);
