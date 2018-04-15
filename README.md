@@ -20,16 +20,17 @@ Option | Description | Range
 `-s, --strategy` | door selection strategy | `switch or stay`
 
 
-Some or all of the parameters may be input.
-
 The default values are:
 
 - 3 doors
 - 1 open
-- Must enter a value for instances or program will display help
-- Must enter a value for strategy or program will display help
 
-The open parameter may not be more than (doors - 2).
+
+Must enter a value for instances or program will display help.
+
+Must enter a value for strategy or program will display help.
+
+The `open` parameter may not be more than `(doors - 2)`.
 If any parameter is intered incorrectly, a help menu will display.
 
 Once the program has acceptable input parameters, it will display the resulting probability
