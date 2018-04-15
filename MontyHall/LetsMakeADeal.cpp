@@ -1,13 +1,12 @@
 ﻿#include "stdafx.h"
 
-#include <vector>
 #include <random>
 #include "gsl.h"
 
 #include "LetsMakeADeal.h"
 
-LetsMakeADeal::LetsMakeADeal(const int& doors, const int& open, const Strategy& strat) :
-	doors_{ doors }, open_{ open }, strat_{ strat }
+LetsMakeADeal::LetsMakeADeal(const int& doors, const int& disclose, const Strategy& strat) :
+	doors_{ doors }, disclose_{ disclose }, strat_{ strat }
 {}
 
 bool LetsMakeADeal::simulateDeal() const
@@ -37,9 +36,6 @@ bool LetsMakeADeal::simulateDeal() const
 	case Strategy::kError:
 		win = false;
 		break;
-	default:
-		win = false;
-		break;
 	}
 
 	Ensures(strat_ == Strategy::kKeep || strat_ == Strategy::kTrade); //stuff that should never happen
@@ -55,5 +51,3 @@ int LetsMakeADeal::randomDoor(const int doors) const
 
 	return randDoor(gen);
 }
-
-

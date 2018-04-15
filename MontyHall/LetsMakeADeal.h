@@ -8,12 +8,12 @@ class LetsMakeADeal
 private:
 
 	const int doors_{ 3 };
-	const int open_{ 1 };
+	const int disclose_{ 1 };
 	const Strategy strat_;
 
 public:
 	
-	LetsMakeADeal(const int& doors, const int& open, const Strategy& strat);
+	LetsMakeADeal(const int& doors, const int& disclose, const Strategy& strat);
 
 	bool simulateDeal() const;
 
@@ -25,10 +25,3 @@ private:
 
 #endif
 
-//create doors 
-//random pick door that hides car (1)
-//set all other doors to goat (0)
-//random pick initial door
-//apply strat
-//calculate probability and add to probability total
-//
