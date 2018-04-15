@@ -8,19 +8,19 @@
 #include "LetsMakeADeal.h"
 #include <sstream>
 #include "gsl.h"
-using namespace std; 
+using namespace std;
 
 namespace // unnamed 
 {
-
 	void userHelp()
 	{
 		cout <<
 			"MontyHall Help \n"
 			"---------------\n"
+			"There was an error with your entry\n"
 			"Input Example: MontyHall.exe 1 stay 3 1\n"
 			"\n"
-			"Usage: MontyHall.exe trials strategy doors disclose.\n"
+			"usage: MontyHall.exe trials strategy doors disclose.\n"
 			"trials: The number of times to run the simulation.\n"
 			"strategy: stay | switch.\n"
 			"doors: The total number of doors in the simulation.\n"
@@ -37,26 +37,27 @@ namespace // unnamed
 		}
 		else if (strategyParam == "switch")
 		{
-			result = LetsMakeADeal::Strategy::kSwitch; 
+			result = LetsMakeADeal::Strategy::kSwitch;
 		}
-		return result; 
+		return result;
 	}
 }
 
 int main(int argc, char *argv[])
 {
-	constexpr auto kTrialsIndex{ 1 }; 
+	constexpr auto kTrialsIndex{ 1 };
 	constexpr auto kStrategyIndex{ 2 };
 	constexpr auto kDoorsIndex{ 3 };
 	constexpr auto kDiscloseIndex{ 4 };
 
 	// default parameters
-	size_t doors{ 3 }; 
-	size_t disclose{ 1 }; 
-	size_t trials{ 0 }; 
+	size_t doors{ 3 };
+	size_t disclose{ 1 };
+	int trials{ 0 };
+
 	LetsMakeADeal::Strategy strategy{ LetsMakeADeal::Strategy::kUnknown };
 
-	if (argc>=3 && argc < 6)
+	if (argc >= 3 && argc < 6)
 	{
 		istringstream iss;
 		int tmp{ };
@@ -64,11 +65,11 @@ int main(int argc, char *argv[])
 		iss.clear();
 		iss.str(argv[kTrialsIndex]);
 		tmp = trials;
-		iss >> tmp; 
+		iss >> tmp;
 		if (iss.eof())
 		{
-			trials = tmp; 
-		} 
+			trials = tmp;
+		}
 
 		strategy = parseStrategy(argv[kStrategyIndex]);
 
@@ -91,7 +92,14 @@ int main(int argc, char *argv[])
 		}
 	}
 
-	if (disclose >= doors || (strategy != LetsMakeADeal::Strategy::kSwitch && strategy != LetsMakeADeal::Strategy::kStay) || doors<2 || trials <1 || disclose<0)
+	if (disclose >= doors
+		|| (strategy != LetsMakeADeal::Strategy::kSwitch && strategy != LetsMakeADeal::Strategy::kStay)
+		|| doors < disclose
+		|| doors == disclose
+		|| doors < 3
+		|| trials < 1
+		|| disclose <0
+		|| doors > disclose + 2)
 	{
 		userHelp();
 	}
@@ -99,27 +107,32 @@ int main(int argc, char *argv[])
 	{
 		std::vector<LetsMakeADeal> games;
 
-		size_t carTotal{ 0 };
-		size_t goatTotal{ 0 };
+		auto carTotal{ 0 };
+		auto goatTotal{ 0 };
 
 		for (auto i{ 0 }; i < trials; i++)
 		{
 			games.push_back(LetsMakeADeal(doors, disclose, strategy));
-			if (games[i].playGame() == LetsMakeADeal::prize::car)
+		}
+		for (auto &game : games)
+		{
+			game.playGame();
+			if (game.result_ == LetsMakeADeal::result::win)
 			{
-				carTotal++;
+				++carTotal;
 			}
 			else
 			{
-				goatTotal++;
+				++goatTotal;
 			}
 		}
 
-		const auto probabilityCar = (1.0 * carTotal) / trials;
-		const auto probabilityGoat = (1.0 * goatTotal) / trials;
+		const auto probabilityCar = (carTotal * 1.0) / (trials * 1.0);
+		const auto probabilityGoat = (goatTotal * 1.0) / (trials * 1.0);
 
-		assert(99 <= probabilityCar + probabilityGoat <= 100);
-		cout << probabilityCar;
+		assert(0.999 < probabilityCar + probabilityGoat && probabilityCar + probabilityGoat < 1.001);
+
+		cout << probabilityCar << endl;
 		return 0;
 	}
 }

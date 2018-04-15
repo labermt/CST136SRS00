@@ -3,16 +3,20 @@
 #include <random>
 
 
-LetsMakeADeal::LetsMakeADeal(size_t numOfDoors, size_t openDoors, const Strategy strategy) :
+LetsMakeADeal::LetsMakeADeal(int numOfDoors, int openDoors, const Strategy strategy) :
 	numOfDoors_{ numOfDoors },
 	openDoors_{ openDoors },
-	finalLength_{ numOfDoors - openDoors },
-	chosenDoor_{randomDoor()},
-	strategy_ { strategy } 
-{
-	for (size_t i{}; i < finalLength_;i++)
+	chosenDoor_{ randomDoor() },
+	strategy_{ strategy },
+	finalLength_{ 0 }
 	{
-		doors_[i] = prize::goat;// this puts a goat in each door
+		if (numOfDoors > openDoors)
+		{
+			finalLength_ = numOfDoors - openDoors;
+		}
+	for (int i{}; i < finalLength_;i++)
+	{
+		doors_.push_back( prize::goat);// this puts a goat in each door
 	}
 	doors_[randomDoor()] = prize::car;
 }
@@ -26,22 +30,25 @@ int LetsMakeADeal::randomDoor() const
 	return dis(gen);
 }
 
-LetsMakeADeal::prize LetsMakeADeal::playGame()
+void LetsMakeADeal::playGame()
 {
-	// choose a door at random
-	doors_[randomDoor()] = prize::car;
 	guessDoor(); 
-	// disclose the doors that does not have the car or the chosen door 
-	openDoors();
-	// if switch, then choose an available door (cannot be disclosed)
-	if (strategy_== Strategy::kSwitch);
+	for (auto i{ 0 }; i < openDoors_; i++)
+	{
+		openDoors();
+	}
+	if (strategy_== Strategy::kSwitch)
 	{
 		guessDoor(); 
 	}
-	
-	// open door, return prize 
-
-
+	if (doors_ [guess_] == prize::car)
+	{
+		result_ = result::win; 
+	}
+	else
+	{
+		result_ = result::lose; 
+	}
 }
 
 void LetsMakeADeal::guessDoor()
