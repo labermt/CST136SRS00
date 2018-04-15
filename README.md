@@ -1,7 +1,20 @@
 # CST136SRS00
 Monty Hall
 
-Name: 
+Name: AJ Stacher
+
+Notes: 
+
+	Command line args:
+
+		arg1 - Strategy -> 0 for Switch, 1 for Stay
+		arg2 - Number of instances, must be an int > 0
+		arg3 - Number of Doors,  default == 3
+		arg4 - Number of doors to disclose, default == 1
+
+		*Number of doors to disclose cannot be greater than total number of doors
+
+Issues:	n/a
 
 ---
 
