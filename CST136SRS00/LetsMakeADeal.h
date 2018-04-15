@@ -11,5 +11,5 @@ private:
 public:
 	LetsMakeADeal(const int doors, const int open, const bool plan);
 
-	bool play();
+	const bool play();
 };

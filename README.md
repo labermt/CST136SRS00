@@ -2,6 +2,12 @@ Monty Hall
 
 Class ID: Phantump
 
+Notes: When sending in parameters in the command line, they need to come in this order: [Instances], [Stay or Swap plan], [Doors total], [Doors to reveal]
+The stay or swap plan asks for boolian logic, so 0 for stay and 1 for swap. If it doesn't get either of those numbers, it'll mention it to you.
+The first two commands are required, and if not inputed, will prompt the user to do so, the last two are optional and will default to 3 and 1 as per specifications.
+If any number is outside of bounds, or doesn't follow the rules of the game (like reveal more doors than there are doors) it will note that and prompt you for a new number.
+Also, by the structure of the input, you can't change doors revealed without stateing doors, however you can just put 3 for the default if that's what you wish
+
 ---
 
 Purpose: 
