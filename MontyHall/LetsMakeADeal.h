@@ -8,8 +8,8 @@ public:
 private:
 	int instances;
 	bool stay;
-	int doors{ 3 };
-	int disclose{ 1 };
+	int doors;
+	int disclose;
 	vect_tup outcome;
 
 public:
@@ -19,8 +19,8 @@ public:
 	int get_disclose();
 	bool get_stay();
 	vect_tup get_outcome();
-	int pick_door(int);
-	void play_game(int num_game, bool stay, int doors, int disclose);
+	int pick_door(int,int);
+	void play_game(int, bool, int, int);
 	float car_prob(vect_tup, int);
 	float goat_prob(vect_tup, int);
 

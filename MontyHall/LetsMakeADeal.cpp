@@ -41,48 +41,33 @@ LetsMakeADeal::vect_tup LetsMakeADeal::get_outcome()
 	return outcome;
 }
 
-int LetsMakeADeal::pick_door(int num_door) 
+int LetsMakeADeal::pick_door(int open, int num_door) 
 {
 	// en.cppreference.com/w/cpp/numeric/random
 	std::random_device rd;  
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> dis(1, num_door);
+	std::uniform_int_distribution<> dis(open, num_door);
 	return dis(gen);
 }
 
 void LetsMakeADeal::play_game(int num_game, bool stay, int doors, int disclose) 
 {
-	int j = 0;
 	for (int i = 0; i < num_game; ++i)
 	{
 		int car = 0;
 		int goat = 0;
-		int choice = pick_door(doors);
-		if (stay == true)
+		if (doors - disclose == 2)
 		{
-			if (choice == 1)
-			{
-				car = 1;
-			}
-			else
-			{
-				goat = 1;
-			}
-		}
-		else 
-		{
-			if ((doors - disclose) > 2)
-			{
-				int new_choice = pick_door(doors - disclose);
-				while (new_choice == choice) {
-					new_choice = pick_door(doors - disclose);
+			int choice = pick_door(1, 3);
+			if (stay == true) {
+				if (choice == 1)
+				{
+					car = 1;
 				}
-					if (new_choice == 1) {
-						car = 1;
-					}
-					else {
-						goat = 1;
-					}
+				else
+				{
+					goat = 1;
+				}
 			}
 			else {
 				if (choice != 1) {
@@ -93,10 +78,29 @@ void LetsMakeADeal::play_game(int num_game, bool stay, int doors, int disclose)
 				}
 			}
 		}
+		else 
+		{
+			if (stay == true) {
+				int choice = pick_door(1, doors);
+				if (choice == doors) {
+					car = 1;
+				}
+				else {
+					goat = 1;
+				}
+			}
+			else {
+				int new_choice = pick_door(disclose + 1, doors);
+				if (new_choice == doors) {
+					car = 1;
+				}
+				else {
+					goat = 1;
+				}
+			}
+		}
 		LetsMakeADeal::outcome.push_back(std::make_tuple(car, goat));
-		j += 1;
 	}
-	cout << j << endl;
 	return;
 }
 
@@ -107,7 +111,9 @@ float LetsMakeADeal::car_prob(vect_tup games, int num)
 	for (std::tuple<int, int> n : games) {
 		sum += get<0>(n);
 	}
+	
 	cout << "The probability of winning a car is: " << sum / num << endl;
+	cout << sum << endl;
 	return sum / num;
 }
 
