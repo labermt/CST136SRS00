@@ -111,9 +111,7 @@ float LetsMakeADeal::car_prob(vect_tup games, int num)
 	for (std::tuple<int, int> n : games) {
 		sum += get<0>(n);
 	}
-	
-	cout << "The probability of winning a car is: " << sum / num << endl;
-	cout << sum << endl;
+	//cout << "The probability of winning a car is: " << sum / num << endl;
 	return sum / num;
 }
 
@@ -123,6 +121,6 @@ float LetsMakeADeal::goat_prob(vect_tup games, int num)
 	for (std::tuple<int, int> n : games) {
 		sum += get<1>(n);
 	}
-	cout << "The probability of winning a goat is: " << sum / num << endl;
+	//cout << "The probability of winning a goat is: " << sum / num << endl;
 	return sum / num;
 }
