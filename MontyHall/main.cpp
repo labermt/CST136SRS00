@@ -105,7 +105,7 @@ int main(int const argc, char* const argv[])
 		auto const loss_percent{ (losses *1.0) / (games *1.0) };
 
 		std::cout << win_percent << std::endl;
-		assert(.999999 < win_percent + loss_percent < 1.000001);
+		assert(.999999 < win_percent + loss_percent && win_percent + loss_percent  < 1.000001);
 	}
 	return 0;
 }
