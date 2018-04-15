@@ -82,11 +82,6 @@ int main(int const argc, char* const argv[])
 			game_list.emplace_back(game);
 		}
 
-		for (auto &game : game_list)
-		{
-			game.run_game();
-		}
-
 		auto wins{ 0 };
 		auto losses{ 0};
 

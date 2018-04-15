@@ -41,7 +41,7 @@ int LetsMakeADeal::get_rand_num(int const max)
 	static std::random_device rd;
 	static std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> const rand_door(0, (max - 1));
-	
+
 	auto const result = rand_door(gen);
 	return result;
 }
@@ -50,29 +50,27 @@ void LetsMakeADeal::guess_door()
 {
 	if (guess_ >= 0)
 	{
-		auto door_index{ 0 };
-		auto guessed_door{ 1 };
-		
-		for (auto &door : door_collection_)
+		auto unavailable_doors{ 1 + doors_to_open_ };
+
+		for (auto i = 0; i <total_doors_; ++i)
 		{
-			auto const unavailable_doors{ guessed_door + doors_to_open_ + door_index };
-			auto const check = total_doors_ - unavailable_doors +1 ;
-			if (door_index != guess_ && door != door_state::opened && get_rand_num(check) == 0 )
+			auto const check = total_doors_ - unavailable_doors;
+			auto probability = get_rand_num(check);
+			if (i != guess_ && door_collection_[i] != door_state::opened)
 			{
-				guess_ = door_index;
-				break;
+				if(probability == 0)
+				{
+					guess_ = i;
+					break;
+				}
+				++unavailable_doors;
 			}
-			if(door_index == guess_)
-			{
-				guessed_door = 0;
-			}
-			++door_index;
 		}
 	}
 	else
 	{
 		auto guess = get_rand_num(total_doors_);
-		while (door_collection_[guess] == door_state::opened )
+		while (door_collection_[guess] == door_state::opened)
 		{
 			guess = get_rand_num(total_doors_);
 		}
@@ -97,6 +95,7 @@ LetsMakeADeal::LetsMakeADeal(int const doors, int const open_doors, std::string 
 		strat_ = strategy::change;
 	}
 	door_collection_.assign(doors, door_state::goat);
+	run_game();
 }
 
 void LetsMakeADeal::display_help()
