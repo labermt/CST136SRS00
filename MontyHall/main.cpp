@@ -104,7 +104,11 @@ int main(int argc, char *argv[])
 		|| doors < 3
 		|| trials < 1
 		|| disclose < 0
-		|| doors > disclose + 2)
+		|| doors < disclose + 2)
+	{
+		userHelp();
+	}
+	if (doors - disclose == 1)
 	{
 		userHelp();
 	}
@@ -133,7 +137,7 @@ int main(int argc, char *argv[])
 			}
 		}
 
-		const auto probabilityCar{ (carTotal * 1.0) / (trials * 1.0 ) };
+		const auto probabilityCar{ (carTotal * 1.0) / (trials * 1.0) };
 		const auto probabilityGoat{ (goatTotal * 1.0) / (trials * 1.0) };
 		cout << probabilityCar;
 
