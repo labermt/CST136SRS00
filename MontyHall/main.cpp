@@ -18,14 +18,20 @@ namespace // unnamed
 			"MontyHall Help \n"
 			"---------------\n"
 			"There was an error with your entry\n"
+			"---------------\n"
 			"Input Example: MontyHall.exe 1 stay 3 1\n"
 			"\n"
 			"usage: MontyHall.exe trials strategy doors disclose.\n"
+			"\n"
 			"trials: The number of times to run the simulation.\n"
+			"\n"
 			"strategy: stay | switch.\n"
+			"\n"
 			"doors: The total number of doors in the simulation.\n"
+			"\n"
 			"disclose: The number of doors to be disclosed in the simulation.\n"
-			"Note: disclose < doors.\n";
+			"\n"
+			"Note: disclose < doors.\n \n";
 	}
 
 	LetsMakeADeal::Strategy parseStrategy(std::string const strategyParam)
@@ -51,9 +57,9 @@ int main(int argc, char *argv[])
 	constexpr auto kDiscloseIndex{ 4 };
 
 	// default parameters
-	size_t doors{ 3 };
-	size_t disclose{ 1 };
-	int trials{ 0 };
+	auto doors{ 3 };
+	auto disclose{ 1 };
+	auto trials{ 1 };
 
 	LetsMakeADeal::Strategy strategy{ LetsMakeADeal::Strategy::kUnknown };
 
@@ -94,11 +100,10 @@ int main(int argc, char *argv[])
 
 	if (disclose >= doors
 		|| (strategy != LetsMakeADeal::Strategy::kSwitch && strategy != LetsMakeADeal::Strategy::kStay)
-		|| doors < disclose
 		|| doors == disclose
 		|| doors < 3
 		|| trials < 1
-		|| disclose <0
+		|| disclose < 0
 		|| doors > disclose + 2)
 	{
 		userHelp();
@@ -114,10 +119,11 @@ int main(int argc, char *argv[])
 		{
 			games.push_back(LetsMakeADeal(doors, disclose, strategy));
 		}
+
 		for (auto &game : games)
 		{
 			game.playGame();
-			if (game.result_ == LetsMakeADeal::result::win)
+			if (game.getResult() == LetsMakeADeal::result::win)
 			{
 				++carTotal;
 			}
@@ -127,12 +133,11 @@ int main(int argc, char *argv[])
 			}
 		}
 
-		const auto probabilityCar = (carTotal * 1.0) / (trials * 1.0);
-		const auto probabilityGoat = (goatTotal * 1.0) / (trials * 1.0);
+		const auto probabilityCar{ (carTotal * 1.0) / (trials * 1.0 ) };
+		const auto probabilityGoat{ (goatTotal * 1.0) / (trials * 1.0) };
+		cout << probabilityCar;
 
 		assert(0.999 < probabilityCar + probabilityGoat && probabilityCar + probabilityGoat < 1.001);
-
-		cout << probabilityCar << endl;
 		return 0;
 	}
 }
