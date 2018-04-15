@@ -1,8 +1,7 @@
 # CST136SRS00
 Monty Hall
 
-Name: 
-An C. 
+Name: An C. 
 ---
 
 Purpose: 
