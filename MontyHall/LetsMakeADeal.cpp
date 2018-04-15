@@ -9,7 +9,6 @@ void LetsMakeADeal::open_random_door()
 {
 	auto door_index{ 0 };
 	auto unavailable_doors{ 2 };
-	auto doors_to_open{ doors_to_open_ };
 
 	if (door_collection_[guess_] == door_state::car)
 	{
@@ -21,18 +20,14 @@ void LetsMakeADeal::open_random_door()
 		if (door == door_state::goat && door_index != guess_)
 		{
 			auto const check = (total_doors_ - unavailable_doors);
-			if (get_rand_num(check) < doors_to_open)
+			if (get_rand_num(check) < doors_to_open_)
 			{
 				door = door_state::opened;
-				--doors_to_open;
+				break;
 			}
 			++unavailable_doors;
 		}
 		++door_index;
-		if (doors_to_open == 0)
-		{
-			break;
-		}
 	}
 }
 
@@ -50,12 +45,12 @@ void LetsMakeADeal::guess_door()
 {
 	if (guess_ >= 0)
 	{
-		auto unavailable_doors{ 1 + doors_to_open_ };
+		auto unavailable_doors{ 1 +  doors_to_open_ };
 
 		for (auto i = 0; i <total_doors_; ++i)
 		{
 			auto const check = total_doors_ - unavailable_doors;
-			auto probability = get_rand_num(check);
+			auto const probability = get_rand_num(check);
 			if (i != guess_ && door_collection_[i] != door_state::opened)
 			{
 				if(probability == 0)

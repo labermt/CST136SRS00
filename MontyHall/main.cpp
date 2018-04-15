@@ -67,7 +67,7 @@ int main(int const argc, char* const argv[])
 		}
 	}
 
-	if (games == 0 || fault || doors < open_doors + 2)
+	if (games == 0 || fault || doors - open_doors < 2)
 	{
 		LetsMakeADeal::display_help();
 	}
