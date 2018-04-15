@@ -56,7 +56,7 @@ int LetsMakeADeal::checkDoors(choice strategy)
 {
 	auto tally{ 0 };
 
-	for (auto i{ 0 }; i < numDoors_; i++)
+	for (size_t i{ 0 }; i < numDoors_; i++)
 	{
 		if (strategy == choice::stay)
 		{
