@@ -31,7 +31,6 @@ int main(int const argc, char* const argv[])
 				if (doors < 3)
 				{
 					fault = true;
-					break;
 				}
 				break;
 			}
@@ -98,9 +97,8 @@ int main(int const argc, char* const argv[])
 		}
 		auto const win_percent{ (wins *1.0) / (games *1.0) };
 		auto const loss_percent{ (losses *1.0) / (games *1.0) };
-
-		std::cout << win_percent << std::endl;
 		assert(.999999 < win_percent + loss_percent && win_percent + loss_percent  < 1.000001);
+		std::cout << win_percent << std::endl;
 	}
 	return 0;
 }

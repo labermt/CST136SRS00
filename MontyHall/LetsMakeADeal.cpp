@@ -100,9 +100,9 @@ void LetsMakeADeal::display_help()
 		"-open followed by a number for the amount of doors you would like to open,\n"
 		"-games followed by a number for the amount of games you would like to run,\n"
 		"-strategy followed by either 'change' or 'stay' for your strategy of changing doors or not.\n\n"
-		"Notes: \nparameters can be in any order,\n-doors , and -open are optional parameters (they default to 3 and 1 respectivly)\n"
+		"Notes: \nparameters can be in any order,\n-doors , and -open are optional parameters (they default to 3 and 1 respectivly),\n"
 		"-games needs to be be > 0, \n"
-		"if you provide -doors and / or -open parameters doors needs to be +2 more than open doors otherwise, whats the point?\n"
+		"if you provide -doors and / or -open parameters doors needs to be +2 more than open doors.\n\n"
 		"Example: 'MontyHall.exe -games 100 -strategy stay -doors 5 -open 2'" << std::endl;
 }
 

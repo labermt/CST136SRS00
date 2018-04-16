@@ -14,7 +14,7 @@ public:
 
 private:
 	int const total_doors_;
-	int doors_to_open_;
+	int const doors_to_open_;
 	int guess_{ -1 };
 	result result_{};
 	strategy strat_;
