@@ -38,8 +38,7 @@ int LetsMakeADeal::get_rand_num(int const max)
 	static std::mt19937 gen(rd());
 	std::uniform_int_distribution<int> const rand_door(0, (max - 1));
 
-	auto const result = rand_door(gen);
-	return result;
+	return rand_door(gen);
 }
 
 void LetsMakeADeal::guess_door()
