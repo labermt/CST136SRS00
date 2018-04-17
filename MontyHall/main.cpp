@@ -62,11 +62,6 @@ int main(int const argc, char* const argv[])
 				iss >> games;
 				break;
 			}
-			case 'h':
-			{
-				fault = true;
-				break;
-			}
 			default:
 			{
 				fault = true;
