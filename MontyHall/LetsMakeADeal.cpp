@@ -64,12 +64,7 @@ void LetsMakeADeal::guess_door()
 	}
 	else
 	{
-		auto guess = get_rand_num(total_doors_);
-		while (door_collection_[guess] == door_state::opened)
-		{
-			guess = get_rand_num(total_doors_);
-		}
-		guess_ = guess;
+		guess_ = get_rand_num(total_doors_);
 	}
 }
 
@@ -96,14 +91,14 @@ LetsMakeADeal::LetsMakeADeal(int const doors, int const open_doors, std::string 
 void LetsMakeADeal::display_help()
 {
 	std::cout << "\nThere was an error with your input. Please follow the guidelines below and rerun the program.\n\n"
-		"Parameter format:\n'-d' for total doors,\n"
-		"'-o' for doors to open,\n"
-		"'-g' for games to run,\n"
-		"'-s' for strategy followed by either 'switch' or 'stay'.\n\n"
-		"Notes: \nparameters can be in any order,\ndoors, and open are optional parameters (they default to 3 and 1 respectivly),\n"
-		"games needs to be be > 0, \n"
-		"if you provide doors and / or open parameters doors needs to be at least 2 more than open doors.\n\n"
-		"Example: 'MontyHall.exe -g 100 -s stay -d 5 -o 2'" << std::endl;
+		"Parameter format:\n\t'-d' for total doors,\n"
+		"\t'-o' for doors to open,\n"
+		"\t'-g' for games to run,\n"
+		"\t'-s' for strategy followed by either 'switch' or 'stay'.\n\n"
+		"Notes: \n\tparameters can be in any order,\n\tdoors, and open are optional parameters (they default to 3 and 1 respectivly),\n"
+		"\tgames needs to be be > 0, \n"
+		"\tif you provide doors and / or open parameters doors needs to be at least 2 more than open doors.\n\n"
+		"Example: 'MontyHall.exe -g 100 -s stay -d 5 -o 2'\n" << std::endl;
 }
 
 void LetsMakeADeal::run_game()

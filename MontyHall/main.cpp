@@ -1,5 +1,4 @@
 ﻿#include "stdafx.h"
-#include <iostream>
 #include "LetsMakeADeal.h"
 #include <string>
 #include <cassert>
