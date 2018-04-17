@@ -5,29 +5,30 @@
 #include <iostream>
 
 
-void LetsMakeADeal::open_random_door()
+void LetsMakeADeal::open_doors_randomly()
 {
-	auto door_index{ 0 };
 	auto unavailable_doors{ 2 };
-
 	if (door_collection_[guess_] == door_state::car)
 	{
 		unavailable_doors = 1;
 	}
 
-	for (auto &door : door_collection_)
+	auto doors_to_open{ doors_to_open_ };
+	while (doors_to_open > 0)
 	{
-		if (door == door_state::goat && door_index != guess_)
+		for (auto i = 0; i < total_doors_; ++i)
 		{
-			auto const check = (total_doors_ - unavailable_doors);
-			if (get_rand_num(check) < doors_to_open_)
+			if (door_collection_[i] == door_state::goat && i != guess_)
 			{
-				door = door_state::opened;
-				break;
+				auto const check = (total_doors_ - unavailable_doors);
+				if (get_rand_num(check) < doors_to_open)
+				{
+					door_collection_[i] = door_state::opened;
+					--doors_to_open;
+				}
+				++unavailable_doors;
 			}
-			++unavailable_doors;
 		}
-		++door_index;
 	}
 }
 
@@ -45,15 +46,15 @@ void LetsMakeADeal::guess_door()
 {
 	if (guess_ >= 0)
 	{
-		auto unavailable_doors{ 1 +  doors_to_open_ };
+		auto unavailable_doors{ 1 + doors_to_open_ };
 
-		for (auto i = 0; i <total_doors_; ++i)
+		for (auto i = 0; i < total_doors_; ++i)
 		{
 			auto const check = total_doors_ - unavailable_doors;
 			auto const probability = get_rand_num(check);
 			if (i != guess_ && door_collection_[i] != door_state::opened)
 			{
-				if(probability == 0)
+				if (probability == 0)
 				{
 					guess_ = i;
 					break;
@@ -96,24 +97,21 @@ LetsMakeADeal::LetsMakeADeal(int const doors, int const open_doors, std::string 
 void LetsMakeADeal::display_help()
 {
 	std::cout << "\nThere was an error with your input. Please follow the guidelines below and rerun the program.\n\n"
-		"Parameter format:\n-doors followed by a number for the number of doors you would like in the game,\n"
-		"-open followed by a number for the amount of doors you would like to open,\n"
-		"-games followed by a number for the amount of games you would like to run,\n"
-		"-strategy followed by either 'change' or 'stay' for your strategy of changing doors or not.\n\n"
-		"Notes: \nparameters can be in any order,\n-doors , and -open are optional parameters (they default to 3 and 1 respectivly),\n"
+		"Parameter format:\n'-d' for total doors,\n"
+		"'-o' for doors to open, followed by a number,\n"
+		"'-g' for games to run, followed by a number\n"
+		"'-s' for strategy followed by either 'change' or 'stay'.\n\n"
+		"Notes: \nparameters can be in any order,\ndoors, and open are optional parameters (they default to 3 and 1 respectivly),\n"
 		"-games needs to be be > 0, \n"
-		"if you provide -doors and / or -open parameters doors needs to be +2 more than open doors.\n\n"
-		"Example: 'MontyHall.exe -games 100 -strategy stay -doors 5 -open 2'" << std::endl;
+		"if you provide doors and / or open parameters doors needs to be at least 2 more than open doors.\n\n"
+		"Example: 'MontyHall.exe -g 100 -s stay -d 5 -o 2'" << std::endl;
 }
 
 void LetsMakeADeal::run_game()
 {
 	set_car();
 	guess_door();
-	for (auto i = 0; i < doors_to_open_; ++i)
-	{
-		open_random_door();
-	}
+	open_doors_randomly();
 	if (strat_ == strategy::change)
 	{
 		guess_door();

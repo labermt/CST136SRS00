@@ -4,6 +4,7 @@
 #include <string>
 #include <cassert>
 #include <complex>
+#include <iomanip>
 
 int main(int const argc, char* const argv[])
 {
@@ -38,6 +39,10 @@ int main(int const argc, char* const argv[])
 			{
 				std::istringstream iss(argv[i + 1]);
 				iss >> open_doors;
+				if (open_doors < 0)
+				{
+					fault = true;
+				}
 				break;
 			}
 			case 's':
@@ -55,6 +60,11 @@ int main(int const argc, char* const argv[])
 			{
 				std::istringstream iss(argv[i + 1]);
 				iss >> games;
+				break;
+			}
+			case 'h':
+			{
+				fault = true;
 				break;
 			}
 			default:
@@ -81,8 +91,8 @@ int main(int const argc, char* const argv[])
 			game_list.emplace_back(game);
 		}
 
-		auto wins{ 0 };
-		auto losses{ 0};
+		auto wins{ 0.0 };
+		auto losses{ 0.0 };
 
 		for (auto &game : game_list)
 		{
@@ -97,8 +107,8 @@ int main(int const argc, char* const argv[])
 		}
 		auto const win_percent{ (wins *1.0) / (games *1.0) };
 		auto const loss_percent{ (losses *1.0) / (games *1.0) };
-		assert(.999999 < win_percent + loss_percent && win_percent + loss_percent  < 1.000001);
-		std::cout << win_percent << std::endl;
+		assert(.999999 < win_percent + loss_percent && win_percent + loss_percent < 1.000001);
+		printf("%#.2f \n", win_percent);
 	}
 	return 0;
 }

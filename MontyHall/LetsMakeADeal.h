@@ -16,14 +16,14 @@ private:
 	int const total_doors_;
 	int const doors_to_open_;
 	int guess_{ -1 };
-	result result_{};
+	result result_;
 	strategy strat_;
 
-	std::vector<door_state> door_collection_{};
+	std::vector<door_state> door_collection_;
 
 
-	void open_random_door();
-	static int get_rand_num( int const max);
+	void open_doors_randomly();
+	static int get_rand_num(int const max);
 	void guess_door();
 	void set_car();
 
