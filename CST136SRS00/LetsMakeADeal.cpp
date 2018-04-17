@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include <random>
-#include <cassert>
 #include "LetsMakeADeal.h"
 
 std::default_random_engine generator;
@@ -47,5 +46,4 @@ const bool LetsMakeADeal::play()
 			}
 		}
 	}
-	assert(false); //if we've hit this, some logic went wrong
 }
