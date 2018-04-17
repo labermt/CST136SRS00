@@ -98,11 +98,11 @@ void LetsMakeADeal::display_help()
 {
 	std::cout << "\nThere was an error with your input. Please follow the guidelines below and rerun the program.\n\n"
 		"Parameter format:\n'-d' for total doors,\n"
-		"'-o' for doors to open, followed by a number,\n"
-		"'-g' for games to run, followed by a number\n"
-		"'-s' for strategy followed by either 'change' or 'stay'.\n\n"
+		"'-o' for doors to open,\n"
+		"'-g' for games to run,\n"
+		"'-s' for strategy followed by either 'switch' or 'stay'.\n\n"
 		"Notes: \nparameters can be in any order,\ndoors, and open are optional parameters (they default to 3 and 1 respectivly),\n"
-		"-games needs to be be > 0, \n"
+		"games needs to be be > 0, \n"
 		"if you provide doors and / or open parameters doors needs to be at least 2 more than open doors.\n\n"
 		"Example: 'MontyHall.exe -g 100 -s stay -d 5 -o 2'" << std::endl;
 }

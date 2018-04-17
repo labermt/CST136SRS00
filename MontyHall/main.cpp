@@ -49,7 +49,7 @@ int main(int const argc, char* const argv[])
 			{
 				std::istringstream iss(argv[i + 1]);
 				iss >> strat;
-				if (strat == "stay" || strat == "change")
+				if (strat == "stay" || strat == "switch")
 				{
 					break;
 				}
@@ -100,8 +100,8 @@ int main(int const argc, char* const argv[])
 				++losses;
 			}
 		}
-		auto const win_percent{ (wins *1.0) / (games *1.0) };
-		auto const loss_percent{ (losses *1.0) / (games *1.0) };
+		auto const win_percent{ wins / (games *1.0) };
+		auto const loss_percent{ losses  / (games *1.0) };
 		assert(.999999 < win_percent + loss_percent && win_percent + loss_percent < 1.000001);
 		printf("%#.2f \n", win_percent);
 	}
