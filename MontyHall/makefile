@@ -13,4 +13,4 @@ main.o: main.cpp
 	$(CC) -c main.cpp
 
 clean:
-	rm -rf simulation *.o
+	rm -f simulation *.o
