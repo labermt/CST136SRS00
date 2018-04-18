@@ -1,3 +1,7 @@
+#ifndef HEADER_H
+#define HEADER_H
+
+
 #include <iostream>
 #include <getopt.h>
 #include <string>
@@ -11,7 +15,7 @@ class LetsMakeADeal
 
 private:
     int totalDoors;
-    int doorToReveal;
+    int UserDoor;
     string userStrat;
     int carLocation;
     int swapLocation;
@@ -19,17 +23,19 @@ private:
 public:
   LetsMakeADeal();
   void usage();
-  int getDoors() const;
-  int getReveal()const;
+  int getTotalDoors() const;
+  int getUserDoor()const;
   string getStrat() const;
   int getCarLocation() const;
   int getSwapLocation() const;
-  void setDoors(int doors);
-  void setReveal(int doors);
+  void setTotalDoors(int doors);
+  void setUserDoor(int doors);
   void setStrat(string strat);
   void setCarLocation(int door);
   void setSwapLocation(int doors);
   bool playGame();
   int setRandom();
-  int switchStrat();
+  
 };
+
+#endif

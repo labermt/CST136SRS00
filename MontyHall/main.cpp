@@ -1,6 +1,4 @@
-#include "LetsMakeADeal.cpp"
-
-
+#include "header.h"
 int main(int argc, char** argv)
 {
   LetsMakeADeal lmad;
@@ -13,7 +11,7 @@ int main(int argc, char** argv)
   vector<bool> v;
   int option;
   auto dflag{0};
-  auto rflag{0};
+  auto uflag{0};
   auto gflag{0};
   auto sflag{0};
   int games = 0;
@@ -21,7 +19,7 @@ int main(int argc, char** argv)
   int lossCount = 0;
   double probability = 0.0;
    
-  while ((option = getopt(argc, argv, "d:r:g:s:")) != -1)
+  while ((option = getopt(argc, argv, "d:u:g:s:")) != -1)
   {
       switch (option)
       {
@@ -37,10 +35,10 @@ int main(int argc, char** argv)
 	      dflag++;
 	  }
 	  
-	  lmad.setDoors(atoi(optarg));
+	  lmad.setTotalDoors(atoi(optarg));
 	  break;
-      case 'r':
-	  if (rflag)
+      case 'u':
+	  if (uflag)
 	  {
 	      lmad.usage();
 	      exit(1);
@@ -48,10 +46,10 @@ int main(int argc, char** argv)
 	  
 	  else
 	  {
-	      rflag++;
+	      uflag++;
 	  }
 	  
-	  lmad.setReveal(atoi(optarg));
+	  lmad.setUserDoor(atoi(optarg));
 	  break;
       case 'g':
 	  if (gflag)

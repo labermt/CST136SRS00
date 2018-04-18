@@ -3,7 +3,7 @@
 LetsMakeADeal::LetsMakeADeal()
 {
     totalDoors = 0;
-    doorToReveal = 0;
+    UserDoor = 0;
     userStrat = "";
     carLocation = 0;
     swapLocation = 0;
@@ -13,17 +13,21 @@ void LetsMakeADeal::usage()
 {
    cout << "Please supply values for all arguments." << endl;
    cout << "Usage: ./output -d <doors> -r <door to reveal> -g <games> -s <stay/swap>" << endl;
+   cout << "-d is the number of total doors in the game" << endl;
+   cout << "-r is the user selected door" << endl;
+   cout << "-g is the number of games to simulate" << endl;
+   cout << "-s is the strategy to simulate <stay/swap>" << endl;
    exit(1);
 }
 
-int LetsMakeADeal::getDoors() const
+int LetsMakeADeal::getTotalDoors() const
 {
   return totalDoors;
 }
 
-int LetsMakeADeal::getReveal() const
+int LetsMakeADeal::getUserDoor() const
 {
-  return doorToReveal;
+  return UserDoor;
 }
 
 string LetsMakeADeal::getStrat() const
@@ -31,14 +35,14 @@ string LetsMakeADeal::getStrat() const
   return userStrat;
 }
 
-void LetsMakeADeal::setDoors(int doors)
+void LetsMakeADeal::setTotalDoors(int doors)
 {
   totalDoors = doors;
 }
 
-void LetsMakeADeal::setReveal(int doors)
+void LetsMakeADeal::setUserDoor(int doors)
 {
-  doorToReveal = doors;
+  UserDoor = doors;
 }
 
 void LetsMakeADeal::setStrat(string strat)
@@ -65,7 +69,7 @@ void LetsMakeADeal::setSwapLocation(int door)
 {
   
   swapLocation = door;
-  if (getCarLocation() == getReveal())
+  if (getCarLocation() == getUserDoor())
   {
       swapLocation = setRandom();
       while (getSwapLocation() == getCarLocation())
@@ -85,7 +89,7 @@ int LetsMakeADeal::setRandom()
 {
   random_device rd;
   mt19937 gen(rd());
-  uniform_int_distribution<> dis(1, getDoors());
+  uniform_int_distribution<> dis(1, getTotalDoors());
 
   return dis(gen);
 }
@@ -97,9 +101,9 @@ bool LetsMakeADeal::playGame()
   setCarLocation(setRandom());
   setSwapLocation(setRandom());
   if (getStrat() == "swap")
-    setReveal(getSwapLocation());
+    setUserDoor(getSwapLocation());
     
-  if (getReveal() == getCarLocation())
+  if (getUserDoor() == getCarLocation())
   {
       win = true;
       return win;
