@@ -14,7 +14,7 @@ void LetsMakeADeal::usage()
    cout << "Please supply values for all arguments." << endl;
    cout << "Usage: ./output -d <doors> -r <door to reveal> -g <games> -s <stay/swap>" << endl;
    exit(1);
- }
+}
 
 int LetsMakeADeal::getDoors() const
 {
