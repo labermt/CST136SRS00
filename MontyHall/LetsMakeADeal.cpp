@@ -23,7 +23,7 @@ void LetsMakeADeal::setGuess() {
 }
 
 // http://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
-// RandomNumber generates a random number between 0 and max
+// RandomNumber generates a UNIQUE random number between 0 and max
 int LetsMakeADeal::randomNumber(int max) {
     random_device rd;
     mt19937 gen(rd());
@@ -31,7 +31,7 @@ int LetsMakeADeal::randomNumber(int max) {
     return dis(gen);
 }
 
-// createDoors creates an array of doors and behind each door is a goat or a car
+// createDoors creates vector of doors and behind each door is a goat or a car
 // car represented with a 1 and goat represented with a 0
 void LetsMakeADeal::createDoors() {
     for(int i = 0; i < numOfDoors; i++) {

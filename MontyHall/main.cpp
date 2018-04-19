@@ -27,6 +27,17 @@ int main(int argc, char *argv[]) {
     float probabilityCar = 0.0;
     float probabilityGoat = 0.0;
 
+    //If they did not enter "switch" or "stay" exit program with help output
+    if(strcmp(switchOrStay, "switch") != 0 || strcmp(switchOrStay, "stay") != 0) {
+        cout << "Please enter 'switch' or 'stay' as the last argument value" << endl;
+        return 0;
+    }
+
+    //
+    //
+    //Ensure that the first three arguments are integer values --- Having trouble here!
+    //
+    //
 
     //Run the game numOfGameInstances times
     for(int i = numOfGameInstances; i > 0; i--) {
@@ -65,16 +76,17 @@ int main(int argc, char *argv[]) {
 
     assert((probabilityCar + probabilityGoat) == 1);
 
-    cout << probabilityCar;
+    cout << probabilityCar << endl;
+    //cout << probabilityGoat;
 
     return 0;
 }
 
 //Converts a character to an integer number
 int toInt(char * character) {
+    int number;
     stringstream str;
     str << character;
-    int number;
     str >> number;
     return number;
 }
