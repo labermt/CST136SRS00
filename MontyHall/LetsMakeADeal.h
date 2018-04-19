@@ -4,7 +4,7 @@
 class LetsMakeADeal
 {
 private:
-	const int doors_;
+	const int numDoors_;
 	const int reveal_;
 	const Strategy strategy_;
 public:
