@@ -1,7 +1,11 @@
 # CST136SRS00
 Monty Hall
 
-Name: 
+Name: Fennekin
+
+Notes: game runs really slow when for example using 1,000,000 doors, and opening 999,997
+	I have taken steps to ensure this runs as fast as possible however I believe the issue lies in the seed
+	guessing that many random numbers.
 
 ---
 
