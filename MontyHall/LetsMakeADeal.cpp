@@ -13,10 +13,10 @@ void LetsMakeADeal::usage()
 {
    cout << "Please supply values for all arguments." << endl;
    cout << "Usage: ./output -d <doors> -u <user door> -g <games> -s <stay/swap>" << endl;
-   cout << "-d is the number of total doors in the game" << endl;
-   cout << "-d is the user selected door" << endl;
-   cout << "-g is the number of games to simulate" << endl;
-   cout << "-s is the strategy to simulate <stay/swap>" << endl;
+   cout << "-d : the number of total doors in the game" << endl;
+   cout << "-d : the user selected door" << endl;
+   cout << "-g : the number of games to simulate" << endl;
+   cout << "-s : the strategy to simulate <stay/swap>" << endl;
    exit(1);
 }
 
@@ -77,11 +77,6 @@ void LetsMakeADeal::setSwapLocation(int door)
 	swapLocation = setRandom();
       }
   }
-
-  else
-  {
-    swapLocation = getCarLocation();
-  }
 }
 
 
@@ -99,7 +94,7 @@ bool LetsMakeADeal::playGame()
 
   bool win = false;
   setCarLocation(setRandom());
-  setSwapLocation(setRandom());
+  setSwapLocation(getCarLocation());
   if (getStrat() == "swap")
     setUserDoor(getSwapLocation());
     
