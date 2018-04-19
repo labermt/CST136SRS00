@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "LetsMakeADeal.h"
-#include <random>
 #include <iostream>
 
 using namespace std; 
@@ -11,33 +10,21 @@ using namespace std;
 LetsMakeADeal::LetsMakeADeal()
 = default;
 
-
 LetsMakeADeal::~LetsMakeADeal()
 {
-
 }
 
 bool LetsMakeADeal::predictWin(int winningDoor, int winningDoor2)
 {
-
-	//int remainingDoors = totalDoors - openDoors;
-
-	
-	//int winningDoor = distribution(generator);
-	//cout << "Winning door is: " << winningDoor << endl; 
-
+	//using random # generator, define a "winning door" versus a "non-winning door" number
+	// example: if true then "win" is if door is less than/equal to total doors minus 1
+	//          if false then "win" is door 1.
 	if(switchStrategy)
 	{
-		
-		
-		//cout << "Winning door: " << winningDoor << endl; 
 		return (winningDoor<=totalDoors-1);
 	}
 	else
 	{
-
-		
-		//cout << "Winning door: " << winningDoor << endl;
 		return(winningDoor==1);
 	}
 }
