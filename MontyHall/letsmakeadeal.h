@@ -14,7 +14,6 @@ private:
 	size_t const selectDoor_;
 	size_t const carDoor_;
 	choice const strategy_;
-
 	prize result_;
 	std::vector<prize> doors_{};
 
@@ -25,8 +24,8 @@ public:
 	prize getResult() const;
 	void runGame();
 	void static showUsage();
-	int checkDoors(choice);
 
 private:
 	static size_t randomGen(size_t);
+	int checkDoors(choice);
 };

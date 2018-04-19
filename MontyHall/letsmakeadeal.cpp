@@ -26,56 +26,6 @@ LetsMakeADeal::prize LetsMakeADeal::getResult() const
 	return result_;
 }
 
-void LetsMakeADeal::showUsage()
-{
-	std::cout << std::endl <<
-		"Incorrect Parameters!\n"
-		"\n"
-		"\t Usage:\n"
-		"\t -d,--doors			Number of doors (default = 3)\n"
-		"\t -o,--open			Number of doors to open (default = 1)\n"
-		"\t -i,--instances			Number of game instances to run (default = 1)\n"
-		"\t -s,--strategy			Selected strategy (options: stay, switch; default = stay)\n"
-		"\n"
-		"\t Example(s):\n"
-		"\n"
-		"\t MontyHall.exe --doors 3 --open 1 --instances 100 --strategy stay\n"
-		"\t MontyHall.exe -d 5 -o 3 -s switch --instances 1000\n"
-		"\t MontyHall.exe -d 30 --open 2\n"
-		"\n"
-		"\t Important:\n"
-		"\n"
-		"\t Instances and strategy must be entered as parameters or this help will display.\n"
-		"\t The the following must be true: doors > (open + 2).\n"
-		"\n"
-		"\t See README.md for details.\n"
-		<< std::endl;
-}
-
-int LetsMakeADeal::checkDoors(choice strategy)
-{
-	auto tally{ 0 };
-
-	for (size_t i{ 0 }; i < numDoors_; i++)
-	{
-		if (strategy == choice::stay)
-		{
-			if (doors_[i] != prize::goat || i == selectDoor_)
-			{
-				tally++;
-			}
-		}
-		if (strategy == choice::change)
-		{
-			if (doors_[i] == prize::open || i == selectDoor_)
-			{
-				tally++;
-			}
-		}
-	}
-	return tally;
-}
-
 void LetsMakeADeal::runGame()
 {
 	auto cantOpen{ checkDoors(choice::stay) };
@@ -121,6 +71,32 @@ void LetsMakeADeal::runGame()
 	}
 }
 
+void LetsMakeADeal::showUsage()
+{
+	std::cout << std::endl <<
+		"Incorrect Parameters!\n"
+		"\n"
+		"\t Usage:\n"
+		"\t -d,--doors			Number of doors (default = 3)\n"
+		"\t -o,--open			Number of doors to open (default = 1)\n"
+		"\t -i,--instances			Number of game instances to run (default = 1)\n"
+		"\t -s,--strategy			Selected strategy (options: stay, switch; default = stay)\n"
+		"\n"
+		"\t Example(s):\n"
+		"\n"
+		"\t MontyHall.exe --doors 3 --open 1 --instances 100 --strategy stay\n"
+		"\t MontyHall.exe -d 5 -o 3 -s switch --instances 1000\n"
+		"\t MontyHall.exe -d 30 --open 2\n"
+		"\n"
+		"\t Important:\n"
+		"\n"
+		"\t Instances and strategy must be entered as parameters or this help will display.\n"
+		"\t The the following must be true: doors > (open + 2).\n"
+		"\n"
+		"\t See README.md for details.\n"
+		<< std::endl;
+}
+
 size_t LetsMakeADeal::randomGen(const size_t numDoors)
 {
 	// Create random number generator and generate a number between 0 and numDoors - 1
@@ -129,4 +105,28 @@ size_t LetsMakeADeal::randomGen(const size_t numDoors)
 	const std::uniform_int_distribution<size_t> dis(0, numDoors - 1);
 
 	return dis(gen);
+}
+
+int LetsMakeADeal::checkDoors(choice strategy)
+{
+	auto tally{ 0 };
+
+	for (size_t i{ 0 }; i < numDoors_; i++)
+	{
+		if (strategy == choice::stay)
+		{
+			if (doors_[i] != prize::goat || i == selectDoor_)
+			{
+				tally++;
+			}
+		}
+		if (strategy == choice::change)
+		{
+			if (doors_[i] == prize::open || i == selectDoor_)
+			{
+				tally++;
+			}
+		}
+	}
+	return tally;
 }
