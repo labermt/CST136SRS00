@@ -3,6 +3,10 @@ Monty Hall
 
 Name: Jared Muralt
 
+Also after looking at other students code, my help
+output could have been more detailed. I assumed people
+would know how to input basic command line arguments.
+
 ---
 
 Purpose: 

@@ -44,7 +44,7 @@ void LetsMakeADeal::playGame()
 	}
 	const double carsProbability = (numCars * 1.0) / numDoors;
 	const double goatProbability = (numGoats * 1.0) / numDoors;
-	assert(carsProbability + goatProbability == 1.0);
+	assert(carsProbability + goatProbability == 1);
 
 	//predisclose doors
 	int tempDoor;
