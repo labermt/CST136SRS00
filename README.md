@@ -1,9 +1,9 @@
 # CST136SRS00
 Monty Hall
 
-Name: 
+Name: Sasha Sanderson
 
----
+--- Currently experiencing issues with probability but the code runs.
 
 Purpose: 
 
