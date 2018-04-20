@@ -3,7 +3,6 @@
 
 class LetsMakeADeal {
 public:
-public:
 	typedef std::vector<std::tuple<int, int>> vect_tup;
 private:
 	int instances;

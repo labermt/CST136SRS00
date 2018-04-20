@@ -99,9 +99,9 @@ void LetsMakeADeal::play_game(int num_game, bool stay, int doors, int disclose)
 				}
 			}
 		}
-		LetsMakeADeal::outcome.push_back(std::make_tuple(car, goat));
+		outcome.push_back(std::make_tuple(car, goat));
 	}
-	return;
+return;
 }
 
 
