@@ -31,8 +31,10 @@ Output the probability of success as a single number in floating point format [0
 
 After the simulations are run, total the probablity.
 
-Display the probabilty of obtaining the Car.
+Display the probabilty of obtaining the Car.// Run the simultion once is a trial, number of cars/runs 0.0<=p<= 1.0
 
-Create an assert statement to ensure the probability of a Goat vs a Car is 1.0. 
+Create an assert statement to ensure the probability of a Goat vs a Car is 1.0. //aserts/n/1.0
 
 Provide command line help in the event the command line is incomplete. Be concise and helpful. 
+
+// output just a number
