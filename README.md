@@ -1,7 +1,7 @@
 # CST136SRS00
 Monty Hall
 
-Class ID: [REDACTED]
+Class ID: Ralts
 SRS ID: CST136SRS00
 
 Notes:  
