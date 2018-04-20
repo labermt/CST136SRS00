@@ -27,17 +27,6 @@ int main(int argc, char *argv[]) {
     float probabilityCar = 0.0;
     float probabilityGoat = 0.0;
 
-    //If they did not enter "switch" or "stay" exit program with help output
-    if(strcmp(switchOrStay, "switch") != 0 || strcmp(switchOrStay, "stay") != 0) {
-        cout << "Please enter 'switch' or 'stay' as the last argument value" << endl;
-        return 0;
-    }
-
-    //
-    //
-    //Ensure that the first three arguments are integer values --- Having trouble here!
-    //
-    //
 
     //Run the game numOfGameInstances times
     for(int i = numOfGameInstances; i > 0; i--) {
