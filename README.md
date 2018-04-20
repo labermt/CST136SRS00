@@ -14,8 +14,8 @@ Notes:
 
 		*Number of doors to disclose cannot be greater than total number of doors
 
-Issues: Input checking only checks if arg is an int that is greater than zero, any other char as an arg will crash. 
-		Ran out of time to impliment this correctly. But if this is being used as a utility, hopefully the person using it would check this README :)
+Issues: Input checking only checks if arg is an int that is greater than zero, strings will cause a crash 
+		Ran out of time to impliment this correctly. 
 
 ---
 
