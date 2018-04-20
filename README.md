@@ -1,7 +1,13 @@
 # CST136SRS00
 Monty Hall
 
-Name: 
+Class ID: Ralts
+SRS ID: CST136SRS00
+
+Notes:  
+- The number of doors and number of doors to pre-disclose can be left off & the default will be used. If only one is left off, the remaining one is assumed to be the number of doors.
+- In addition to the input help given for an incorrect input, the user can also input "MontyHall.exe Help" for more detailed help. The automatic help instead describes one specific problem.
+- To distinguish between strategies, the user must type "Switch" or "Stay", case sensitive.
 
 ---
 
