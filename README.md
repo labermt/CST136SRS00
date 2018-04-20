@@ -4,6 +4,7 @@ Monty Hall
 Name: Nathan Tout
 
 Notes:
+<<<<<<< HEAD
 
 -takes in command line arguments (# games, bool 1/0, # doors, # disclosed)
 -games are stored as tuples (car, goat) in a vector.
@@ -15,6 +16,18 @@ Unresolved Issues:
 -issue with taking in the default settings if not all peramiters are entered.
 -currently no commandline help.
 -unsure how to properly use constructor/ destructor
+=======
+- takes in command line arguments (# games, bool 1/0, # doors, # disclosed)
+- games are stored as tuples (car, goat) in a vector.
+- help on random-number-generator, vectors, and tuples from cppreference.com
+
+
+Unresolved Issues: 
+- i need to do more studying on const.  pycharm didn't say anything to me like it normally does.
+- issue with taking in the default settings if not all peramiters are entered.
+- currently no commandline help.
+- unsure how to properly use constructor/ destructor
+>>>>>>> 38b7d39691c602936c0495884319aa1d6fc3a07e
 
 
 ---
