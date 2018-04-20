@@ -147,11 +147,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="mhdoor.h" />
+    <ClInclude Include="mhmodel.h" />
+    <ClInclude Include="mhplayer.h" />
+    <ClInclude Include="mhresult.h" />
+    <ClInclude Include="mhstats.h" />
+    <ClInclude Include="proxyrandom.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CST136SRS00.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mhdoor.cpp" />
+    <ClCompile Include="mhmodel.cpp" />
+    <ClCompile Include="mhplayer.cpp" />
+    <ClCompile Include="mhresult.cpp" />
+    <ClCompile Include="mhstats.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
