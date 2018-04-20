@@ -1,7 +1,9 @@
 # CST136SRS00
 Monty Hall
 
-Name: 
+Name: Thea Van Kessel
+
+I need to put more command line help in. Everything runs and functions properly.
 
 ---
 

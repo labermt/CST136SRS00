@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/tvk/Desktop/CST136/CST136SRS00/MontyHall/LetsMakeADeal.cpp
+LetsMakeADeal.h
+/Users/tvk/Desktop/CST136/CST136SRS00/MontyHall/LetsMakeADeal.h
+
+/Users/tvk/Desktop/CST136/CST136SRS00/MontyHall/LetsMakeADeal.h
+iostream
+-
+random
+-
+algorithm
+-
+vector
+-
+
+/Users/tvk/Desktop/CST136/CST136SRS00/MontyHall/main.cpp
+iostream
+-
+sstream
+-
+cassert
+-
+LetsMakeADeal.h
+/Users/tvk/Desktop/CST136/CST136SRS00/MontyHall/LetsMakeADeal.h
+
