@@ -1,7 +1,7 @@
 # CST136SRS00
 Monty Hall
 
-Class ID: Ralts
+Class ID: Jordan Clark  
 SRS ID: CST136SRS00
 
 Notes:  
