@@ -4,8 +4,8 @@ Monty Hall
 Name: Nathan Tout
 
 Notes:
--takes in command line arguments (# games, bool 1/0, # doors, # disclosed)
--games are stored as tuples (car, goat) in a vector.
+- takes in command line arguments (# games, bool 1/0, # doors, # disclosed)
+- games are stored as tuples (car, goat) in a vector.
 
 
 Unresolved Issues: 
