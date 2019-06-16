@@ -1,7 +1,17 @@
 # CST136SRS00
 Monty Hall
 
-Name: 
+Name: Nathan Tout
+
+Notes:
+- takes in command line arguments (# games, bool 1/0, # doors, # disclosed)
+- games are stored as tuples (car, goat) in a vector.
+
+
+Unresolved Issues: 
+- issue with taking in the default settings if not all peramiters are entered.
+- currently no commandline help.
+- Misunderstanding on how game is played with more than 3 doors.
 
 ---
 
